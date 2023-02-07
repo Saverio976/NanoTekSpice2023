@@ -34,10 +34,4 @@ class Handler
         void addChipset(const std::string &type, const std::string &name);
         void addLink(const std::string &name1, std::size_t pin1,
                       const std::string &name2, std::size_t pin2);
-
-        void setInput(const std::string &name, std::size_t value);
-        void display() const;
-        void simulate();
-        void loop();
-        void exit() const;
 };

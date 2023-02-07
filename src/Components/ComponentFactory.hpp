@@ -6,9 +6,11 @@
 */
 
 #pragma once
+#include <memory>
+#include "IComponent.hpp"
 
 class ComponentFactory {
     public:
-    protected:
-    private:
+
+        static std::unique_ptr<nts::IComponent> createComponent(const std::string &type);
 };

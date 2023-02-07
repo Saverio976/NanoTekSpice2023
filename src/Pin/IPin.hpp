@@ -18,7 +18,10 @@ class IPin
         };
 
         virtual nts::Tristate getValue() = 0;
-        virtual PinType getPinType() = 0;
+        virtual PinType getPinType() const = 0;
+
+    protected:
+        virtual void setValue(nts::Tristate) = 0;
 
     private:
 };

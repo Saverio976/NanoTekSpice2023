@@ -55,4 +55,11 @@ fclean: clean
 	rm -f $(TARGET)
 	@echo -e "$(LIGHT_GREEN)Removed target file$(RESET)"
 
+<<<<<<< Updated upstream
 re: clean $(TARGET)
+=======
+re: fclean $(TARGET)
+
+tests_run:
+	echo "No tests for NOW"
+>>>>>>> Stashed changes

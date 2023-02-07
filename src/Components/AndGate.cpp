@@ -20,7 +20,6 @@ AndGate::AndGate()
 
 static nts::Tristate tristate_and(nts::Tristate a, nts::Tristate b)
 {
-    std::cout << a << " && " << b << std::endl;
     if (a == nts::False || b == nts::False) {
         return nts::False;
     } else if (a == nts::True && b == nts::True) {

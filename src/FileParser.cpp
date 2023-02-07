@@ -7,6 +7,7 @@
 
 #include <cstddef>
 #include <fstream>
+#include <ios>
 #include <sstream>
 #include <string>
 #include "Handler.hpp"
@@ -47,6 +48,7 @@ std::size_t FileParser::parseLinkPin(const std::string &all) const
     std::size_t pin;
 
     s.str(all.substr(all.find(':') + 1));
+    s.exceptions(std::ios::failbit);
     s >> pin;
     return pin;
 }
@@ -57,8 +59,8 @@ void FileParser::loadFile(const std::string &fileName)
     std::stringstream linestream;
     std::ifstream f;
     ParsingType type = UNKNOWN;
-    std::string part1Parsed;
-    std::string part2Parsed;
+    std::string rightPart;
+    std::string leftPart;
 
     f.open(fileName);
     if (f.bad() || !f.good() || !f.is_open()) {
@@ -76,13 +78,13 @@ void FileParser::loadFile(const std::string &fileName)
             continue;
         }
         linestream.str(line);
-        linestream >> part1Parsed >> part2Parsed;
+        linestream >> leftPart >> rightPart;
         if (type == CHIPSETS) {
-            this->_handler->addChipset(part1Parsed, part2Parsed);
+            this->_handler->addChipset(leftPart, rightPart);
         } else if (type == LINKS) {
             this->_handler->addLink(
-                this->parseLinkName(part1Parsed), this->parseLinkPin(part1Parsed), 
-                this->parseLinkName(part2Parsed), this->parseLinkPin(part2Parsed)
+                this->parseLinkName(leftPart), this->parseLinkPin(leftPart), 
+                this->parseLinkName(rightPart), this->parseLinkPin(rightPart)
             );
         }
     }

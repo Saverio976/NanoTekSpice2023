@@ -22,7 +22,7 @@ SRC 			=	src/main.cpp					\
 					src/Pin/OutputPin.cpp			\
 					src/FileParser.cpp
 
-INCLUDES 		=	-Iinclude -Isrc/Pin
+INCLUDES 		=	-Iinclude -Isrc/Pin -std=c++20
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23
 

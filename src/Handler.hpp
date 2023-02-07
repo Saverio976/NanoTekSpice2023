@@ -13,10 +13,14 @@
 #include <memory>
 #include "IComponent.hpp"
 #include "PinLink.hpp"
+#include "Shell.hpp"
 
 class Handler
 {
     public:
+        Handler();
+        ~Handler() = default;
+
         void loadFile(const std::string &file_name);
         void readInput();
 
@@ -25,6 +29,7 @@ class Handler
         std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
         std::vector<PinLink> _links;
         std::size_t _tick;
+        Shell _shell;
 
         void addChipset(const std::string &type, const std::string &name);
         void addLink(const std::string &name1, std::size_t pin1,

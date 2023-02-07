@@ -17,6 +17,7 @@ TARGET = nanotekspice
 
 SRC =	src/main.cpp					\
 		src/Handler.cpp					\
+		src/Shell.cpp					\
 		src/Components/AComponent.cpp	\
 		src/Pin/InputPin.cpp			\
 		src/Pin/OutputPin.cpp			\

@@ -78,7 +78,7 @@ void FileParser::loadFile(const std::string &fileName)
         linestream.str(line);
         linestream >> part1Parsed >> part2Parsed;
         if (type == CHIPSETS) {
-            this->_handler->addChipset(part2Parsed, part2Parsed);
+            this->_handler->addChipset(part1Parsed, part2Parsed);
         } else if (type == LINKS) {
             this->_handler->addLink(
                 this->parseLinkName(part1Parsed), this->parseLinkPin(part1Parsed), 

@@ -30,7 +30,7 @@ SRC =	src/main.cpp								\
 
 INCLUDES = -Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate
 
-CPPFLAGS = $(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23 -g3
+CPPFLAGS = $(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23
 
 LDFLAGS =
 
@@ -63,3 +63,6 @@ fclean: clean
 	@echo -e "$(LIGHT_GREEN)Removed target file$(RESET)"
 
 re: clean $(TARGET)
+
+tests_run: $(OBJ)
+	bash tests/functional/base_components.bash

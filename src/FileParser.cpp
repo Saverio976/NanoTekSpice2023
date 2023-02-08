@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <fstream>
 #include <ios>
+#include <iostream>
 #include <sstream>
 #include <string>
 #include "Handler.hpp"
@@ -66,8 +67,8 @@ void FileParser::loadFile(const std::string &fileName)
     while (std::getline(f, line)) {
         std::string rightPart;
         std::string leftPart;
+        std::string rest;
         std::stringstream linestream(line);
-        linestream.exceptions(std::ios::failbit);
         if (line.starts_with("#") || line == "") {
             continue;
         }
@@ -77,6 +78,12 @@ void FileParser::loadFile(const std::string &fileName)
         } else if (line.starts_with(".links:")) {
             type = LINKS;
             continue;
+        }
+        linestream >> leftPart >> rightPart >> rest;
+        if (rest != "") {
+            linestream.rdbuf();
+            linestream << "Bad Line in " << type << ": " << rest;
+            throw FileParsingError(linestream.str());
         }
         if (type == CHIPSETS) {
             this->_handler->addChipset(leftPart, rightPart);

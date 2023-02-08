@@ -8,7 +8,6 @@
 #include <cstddef>
 #include <fstream>
 #include <ios>
-#include <iostream>
 #include <sstream>
 #include <string>
 #include "Handler.hpp"
@@ -60,7 +59,6 @@ void FileParser::loadFile(const std::string &fileName)
     std::ifstream f;
     ParsingType type = UNKNOWN;
 
-
     f.open(fileName);
     if (f.bad() || !f.good() || !f.is_open()) {
         throw FileParsingError("Unable to open file " + fileName);
@@ -71,23 +69,18 @@ void FileParser::loadFile(const std::string &fileName)
         std::stringstream linestream(line);
         linestream.exceptions(std::ios::failbit);
         if (line.starts_with("#") || line == "") {
-            std::cout << "Ignore: # or empty line" << std::endl;
             continue;
         }
         if (line.starts_with(".chipsets:")) {
-            std::cout << "Chipsets: " << std::endl;
             type = CHIPSETS;
             continue;
         } else if (line.starts_with(".links:")) {
-            std::cout << "Links: " << std::endl;
             type = LINKS;
             continue;
         }
         if (type == CHIPSETS) {
-            std::cout << "addChipset" << std::endl;
             this->_handler->addChipset(leftPart, rightPart);
         } else if (type == LINKS) {
-            std::cout << "addLink" << std::endl;
             this->_handler->addLink(
                 this->parseLinkName(leftPart), this->parseLinkPin(leftPart), 
                 this->parseLinkName(rightPart), this->parseLinkPin(rightPart)

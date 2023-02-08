@@ -36,6 +36,7 @@ class Pin
         PinType getPinType() const;
         void setValue(nts::Tristate);
         void addLink(PinLink link);
+        void simulate(size_t tick);
 
     private:
         const PinType _type;

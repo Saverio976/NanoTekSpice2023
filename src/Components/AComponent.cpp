@@ -6,7 +6,8 @@
 */
 
 #include "AComponent.hpp"
-#include "../Pin/Pin.hpp"
+#include <iostream>
+#include "Pin.hpp"
 
 std::ostream & operator <<(std::ostream &os, nts::Tristate val)
 {
@@ -26,16 +27,16 @@ void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t ot
     Pin *in;
     Pin *out;
 
-    if (_pins[pin].getPinType() == other[otherPin].getPinType())
+    if ((*this)[pin].getPinType() == other[otherPin].getPinType())
     {
         throw std::invalid_argument("Trying to link two pins of same type");
     }
-    if (_pins[pin].getPinType() == Pin::INPUT) {
-        in = &_pins[pin];
+    if ((*this)[pin].getPinType() == Pin::INPUT) {
+        in = &(*this)[pin];
         out = &other[otherPin];
     } else {
         in = &other[otherPin];
-        out = &_pins[pin];
+        out = &(*this)[pin];
     }
     link = PinLink(in, out);
     in->addLink(link);
@@ -60,13 +61,11 @@ Pin& AComponent::operator [](std::size_t index)
 
 void AComponent::simulate(std::size_t tick)
 {
-    nts::Tristate v;
     if (_lastTick == tick) {
         return;
     }
     _lastTick = tick;
     for (size_t i = 0; i < _pins.size(); i++) {
-        v = this->compute(i);
-        _pins[i].setValue(v);
+        _pins[i].setValue(this->compute(i));
     }
 }

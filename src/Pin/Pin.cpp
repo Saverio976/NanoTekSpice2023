@@ -59,3 +59,14 @@ void Pin::addLink(PinLink link)
     }
     _links.push_back(link);
 }
+
+void Pin::simulate(size_t tick)
+{
+    if (getPinType() == INPUT) {
+        if (getSource() != nullptr) {
+            getSource()->simulate(tick);
+        }
+    } else {
+        getParent().simulate(tick);
+    }
+}

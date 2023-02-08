@@ -21,8 +21,6 @@ SRC 			=	src/main.cpp						\
 					src/Components/AndGate.cpp			\
 					src/Components/ComponentFactory.cpp	\
 					src/Components/Input.cpp			\
-					src/Pin/InputPin.cpp				\
-					src/Pin/OutputPin.cpp				\
 					src/Pin/Pin.cpp						\
 					src/Pin/PinLink.cpp					\
 					src/FileParser.cpp

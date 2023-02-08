@@ -29,9 +29,9 @@ SRC 			=	src/main.cpp								\
 					src/Pin/PinLink.cpp							\
 					src/FileParser.cpp
 
-INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -std=c++20
+INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate
 
-CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23
+CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++20
 
 LDFLAGS 		=
 

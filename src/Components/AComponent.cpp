@@ -45,18 +45,24 @@ void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t ot
 
 const Pin &AComponent::operator [](std::size_t index) const
 {
-    if (index >= _pins.size()) {
+    if (index == 0) {
+        throw std::invalid_argument("Invalid pin");
+    }
+    if (index - 1 >= _pins.size()) {
         throw std::out_of_range("Chipset doesn't have enough pins");
     }
-    return _pins[index];
+    return _pins[index - 1];
 }
 
 Pin& AComponent::operator [](std::size_t index)
 {
-    if (index >= _pins.size()) {
+    if (index == 0) {
+        throw std::invalid_argument("Invalid pin");
+    }
+    if (index - 1 >= _pins.size()) {
         throw std::out_of_range("Chipset doesn't have enough pins");
     }
-    return _pins[index];
+    return _pins[index - 1];
 }
 
 void AComponent::simulate(std::size_t tick)
@@ -66,6 +72,6 @@ void AComponent::simulate(std::size_t tick)
     }
     _lastTick = tick;
     for (size_t i = 0; i < _pins.size(); i++) {
-        _pins[i].setValue(this->compute(i));
+        _pins[i].setValue(this->compute(i + 1));
     }
 }

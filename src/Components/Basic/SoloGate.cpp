@@ -8,28 +8,26 @@
 #include "SoloGate.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
+#include <iostream>
 #include "PinLink.hpp"
 
 
 SoloGate::SoloGate()
 {
     _lastTick = 0;
-    _pins.push_back(Pin(*this, Pin::INPUT, 0));
     _pins.push_back(Pin(*this, Pin::INPUT, 1));
-    _pins.push_back(Pin(*this, Pin::OUTPUT, 2));
+    _pins.push_back(Pin(*this, Pin::INPUT, 2));
+    _pins.push_back(Pin(*this, Pin::OUTPUT, 3));
 }
 
 nts::Tristate SoloGate::compute(std::size_t pin)
 {
-    if (pin > 3) {
-        throw std::out_of_range("Chipset doesn't have enough pins");
-    }
-    if (pin == 2) {
+    if (pin == 3) {
         _pins[0].simulate(_lastTick);
         _pins[1].simulate(_lastTick);
         return operation(_pins[0].getValue(), _pins[1].getValue());
     }
-    return _pins[pin].getValue();
+    return (*this)[pin].getValue();
 }
 
 nts::IComponent *AndGate::clone() const

@@ -14,14 +14,12 @@ class Pin;
 
 class AComponent: public nts::IComponent {
     public:
-        AComponent();
-        ~AComponent();
-
+        void simulate(std::size_t tick) override;
         void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
 
-        IComponent & operator [](std::size_t index);
-        IComponent operator [](std::size_t index) const;
-    private:
+        Pin &operator [](std::size_t index) override;
+        const Pin &operator [](std::size_t index) const override;
+    protected:
         std::vector<Pin> _pins;
         std::size_t _lastTick;
 };

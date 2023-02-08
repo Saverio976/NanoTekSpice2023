@@ -6,6 +6,7 @@
 */
 
 #include "SoloGate.hpp"
+#include "IComponent.hpp"
 #include "Pin.hpp"
 #include "PinLink.hpp"
 
@@ -31,6 +32,11 @@ nts::Tristate SoloGate::compute(std::size_t pin)
     return _pins[pin].getValue();
 }
 
+nts::IComponent *AndGate::clone() const
+{
+    return new AndGate();
+}
+
 nts::Tristate AndGate::operation(nts::Tristate left, nts::Tristate right)
 {
     if (left == nts::False || right == nts::False) {
@@ -40,6 +46,11 @@ nts::Tristate AndGate::operation(nts::Tristate left, nts::Tristate right)
     } else {
         return nts::Undefined;
     }
+}
+
+nts::IComponent *OrGate::clone() const
+{
+    return new OrGate();
 }
 
 nts::Tristate OrGate::operation(nts::Tristate left, nts::Tristate right)
@@ -53,6 +64,11 @@ nts::Tristate OrGate::operation(nts::Tristate left, nts::Tristate right)
     }
 }
 
+nts::IComponent *XorGate::clone() const
+{
+    return new XorGate();
+}
+
 nts::Tristate XorGate::operation(nts::Tristate left, nts::Tristate right)
 {
     if (left == nts::Undefined || right == nts::Undefined) {
@@ -62,6 +78,11 @@ nts::Tristate XorGate::operation(nts::Tristate left, nts::Tristate right)
     } else {
         return nts::False;
     }
+}
+
+nts::IComponent *NorGate::clone() const
+{
+    return new AndGate();
 }
 
 nts::Tristate NorGate::operation(nts::Tristate left, nts::Tristate right)
@@ -75,6 +96,11 @@ nts::Tristate NorGate::operation(nts::Tristate left, nts::Tristate right)
     }
 }
 
+nts::IComponent *NandGate::clone() const
+{
+    return new AndGate();
+}
+
 nts::Tristate NandGate::operation(nts::Tristate left, nts::Tristate right)
 {
     if (left == nts::False || right == nts::False) {
@@ -85,5 +111,3 @@ nts::Tristate NandGate::operation(nts::Tristate left, nts::Tristate right)
         return nts::False;
     }
 }
-
-

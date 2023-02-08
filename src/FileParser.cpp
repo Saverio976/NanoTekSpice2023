@@ -88,7 +88,7 @@ void FileParser::loadFile(const std::string &fileName)
             );
         }
     }
-    if (f.bad() || !f.good() || !f.is_open()) {
+    if (!f.eof()) {
         throw FileParsingError("Unable to read file " + fileName);
     }
 }

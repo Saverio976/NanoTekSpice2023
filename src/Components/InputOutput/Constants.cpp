@@ -6,6 +6,7 @@
 */
 
 #include "Constants.hpp"
+#include "IComponent.hpp"
 #include "Pin.hpp"
 
 True::True()
@@ -30,10 +31,20 @@ nts::Tristate True::compute(size_t pin)
     return _pins[0].getValue();
 }
 
+nts::IComponent *True::clone() const
+{
+    return new True();
+}
+
 nts::Tristate False::compute(size_t pin)
 {
     if (pin != 0) {
         throw std::out_of_range("Chipset doesn't have enough pins");
     }
     return _pins[0].getValue();
+}
+
+nts::IComponent *False::clone() const
+{
+    return new False();
 }

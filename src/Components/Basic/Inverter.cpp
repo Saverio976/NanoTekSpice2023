@@ -5,6 +5,7 @@
 ** Inverter
 */
 
+#include "IComponent.hpp"
 #include "Pin.hpp"
 #include "Inverter.hpp"
 
@@ -35,4 +36,9 @@ nts::Tristate Inverter::compute(std::size_t pin)
         return triNot(_pins[1].getValue());
     }
     throw std::out_of_range("Chipset doesn't have enough pins");
+}
+
+nts::IComponent *Inverter::clone() const
+{
+    return new Inverter();
 }

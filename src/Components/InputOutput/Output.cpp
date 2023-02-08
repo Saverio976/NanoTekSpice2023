@@ -26,3 +26,8 @@ nts::Tristate Output::compute(std::size_t pin)
     _pins[0].simulate(_lastTick);
     return _pins[0].getValue();
 }
+
+nts::IComponent *Output::clone() const
+{
+    return new Output();
+}

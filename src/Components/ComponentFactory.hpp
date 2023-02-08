@@ -23,7 +23,7 @@ class ComponentFactory {
         };
         ComponentFactory();
 
-        void registerComponent(const std::string &type, std::unique_ptr<nts::IComponent> component);
+        void registerComponent(const std::string &type, nts::IComponent *component);
         void removeComponent(const std::string &type);
 
         std::unique_ptr<nts::IComponent> createComponent(const std::string &type);

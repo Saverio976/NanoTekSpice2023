@@ -6,6 +6,7 @@
 */
 
 #include "Handler.hpp"
+
 int main(int argc, const char *const argv[])
 {
     Handler handler;

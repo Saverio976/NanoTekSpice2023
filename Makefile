@@ -64,3 +64,6 @@ fclean: clean
 	@echo -e "$(LIGHT_GREEN)Removed target file$(RESET)"
 
 re: fclean $(TARGET)
+
+tests_run:
+	echo "No tests for NOW"

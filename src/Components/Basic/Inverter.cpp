@@ -11,8 +11,8 @@
 Inverter::Inverter()
 {
     _lastTick = 0;
-    _pins.push_back(Pin(*this, Pin::INPUT, 0));
-    _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
+    _pins.push_back(Pin(*this, Pin::INPUT, 1));
+    _pins.push_back(Pin(*this, Pin::OUTPUT, 2));
 }
 
 static nts::Tristate triNot(nts::Tristate v)

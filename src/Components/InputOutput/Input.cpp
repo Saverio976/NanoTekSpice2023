@@ -11,7 +11,7 @@
 Input::Input()
 {
     _lastTick = 0;
-    _pins.push_back(Pin(*this, Pin::OUTPUT, 0));
+    _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
 }
 
 void Input::setValue(nts::Tristate new_val)
@@ -21,9 +21,6 @@ void Input::setValue(nts::Tristate new_val)
 
 nts::Tristate Input::compute(std::size_t pin)
 {
-    if (pin != 0) {
-        throw std::out_of_range("Chipset doesn't have enough pins");
-    }
-    _pins[0].setValue(_value);
-    return _pins[0].getValue();
+    (*this)[pin].setValue(_value);
+    return (*this)[pin].getValue();
 }

@@ -15,17 +15,22 @@ RESET = \033[0m
 
 TARGET = nanotekspice
 
-SRC =	src/main.cpp					\
-		src/Handler.cpp					\
-		src/Components/AComponent.cpp	\
-		src/Components/AndGate.cpp		\
-		src/Components/Input.cpp		\
-		src/Pin/Pin.cpp					\
-		src/Pin/PinLink.cpp				\
+SRC =	src/main.cpp								\
+		src/Handler.cpp								\
+		src/Pin/Pin.cpp								\
+		src/Pin/PinLink.cpp							\
+		src/Components/AComponent.cpp				\
+		src/Components/Basic/Inverter.cpp			\
+		src/Components/Basic/SoloGate.cpp			\
+		src/Components/MultiGate/QuadGate.cpp		\
+		src/Components/InputOutput/Input.cpp		\
+		src/Components/InputOutput/Output.cpp		\
+		src/Components/InputOutput/Clock.cpp		\
+		src/Components/InputOutput/Constants.cpp	\
 
-INCLUDES = -Iinclude -Isrc/Pin
+INCLUDES = -Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate
 
-CPPFLAGS = $(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23
+CPPFLAGS = $(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23 -g3
 
 LDFLAGS =
 

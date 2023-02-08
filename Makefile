@@ -23,6 +23,7 @@ SRC =	src/main.cpp								\
 		src/Components/Basic/Inverter.cpp			\
 		src/Components/Basic/SoloGate.cpp			\
 		src/Components/MultiGate/QuadGate.cpp		\
+		src/Components/MultiGate/Component4069.cpp	\
 		src/Components/InputOutput/Input.cpp		\
 		src/Components/InputOutput/Output.cpp		\
 		src/Components/InputOutput/Clock.cpp		\

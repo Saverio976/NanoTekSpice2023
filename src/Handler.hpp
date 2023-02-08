@@ -12,12 +12,27 @@
 #include <map>
 #include <string>
 #include <memory>
+#include "ComponentFactory.hpp"
 #include "IComponent.hpp"
 #include "PinLink.hpp"
 
 class Handler
 {
     public:
+        class ChipsetAlreadyCreatedException : public std::exception {
+            public:
+                ChipsetAlreadyCreatedException(const std::string &error);
+                const char *what() const noexcept override;
+            private:
+                const std::string _error;
+        };
+        class ChipsetNameNotFoundException : public std::exception {
+            public:
+                ChipsetNameNotFoundException(const std::string &error);
+                const char *what() const noexcept override;
+            private:
+                const std::string _error;
+        };
         void loadFile(const std::string &fileName);
         void readInput();
 
@@ -28,12 +43,7 @@ class Handler
     protected:
     private:
         std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
-        std::vector<PinLink> _links;
+        std::map<std::string, std::vector<std::string>> _specialComponents;
         std::size_t _tick;
-
-        void setInput(const std::string &name, std::size_t value);
-        void display() const;
-        void simulate();
-        void loop();
-        void exit() const;
+        ComponentFactory _componentFactory;
 };

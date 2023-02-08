@@ -15,14 +15,15 @@ RESET 			= 	\033[0m
 
 TARGET 			= 	nanotekspice
 
-SRC 			=	src/main.cpp					\
-					src/Handler.cpp					\
-					src/Components/AComponent.cpp	\
-					src/Pin/InputPin.cpp			\
-					src/Pin/OutputPin.cpp			\
+SRC 			=	src/main.cpp						\
+					src/Handler.cpp						\
+					src/Components/AComponent.cpp		\
+					src/Components/ComponentFactory.cpp	\
+					src/Pin/InputPin.cpp				\
+					src/Pin/OutputPin.cpp				\
 					src/FileParser.cpp
 
-INCLUDES 		=	-Iinclude -Isrc/Pin -std=c++20
+INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -std=c++20
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++23
 

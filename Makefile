@@ -18,9 +18,13 @@ TARGET 			= 	nanotekspice
 SRC 			=	src/main.cpp						\
 					src/Handler.cpp						\
 					src/Components/AComponent.cpp		\
+					src/Components/AndGate.cpp			\
 					src/Components/ComponentFactory.cpp	\
+					src/Components/Input.cpp			\
 					src/Pin/InputPin.cpp				\
 					src/Pin/OutputPin.cpp				\
+					src/Pin/Pin.cpp						\
+					src/Pin/PinLink.cpp					\
 					src/FileParser.cpp
 
 INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -std=c++20

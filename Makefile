@@ -15,23 +15,22 @@ RESET 			= 	\033[0m
 
 TARGET 			= 	nanotekspice
 
-SRC 			=	src/main.cpp								\
-					src/Shell.cpp								\
-					src/Handler.cpp								\
-					src/Pin/Pin.cpp								\
-					src/FileParser.cpp							\
-					src/Pin/PinLink.cpp							\
-					src/Components/AComponent.cpp				\
-					src/Components/Basic/Inverter.cpp			\
-					src/Components/Basic/SoloGate.cpp			\
-					src/Components/MultiGate/QuadGate.cpp		\
-					src/Components/MultiGate/Component4069.cpp	\
-					src/Components/InputOutput/Clock.cpp		\
-					src/Components/InputOutput/Constants.cpp	\
-					src/Components/InputOutput/Input.cpp		\
-					src/Components/InputOutput/Output.cpp		\
-					src/Components/MultiGate/QuadGate.cpp		\
-					src/Components/ComponentFactory.cpp
+SRC 			=	src/Components/AComponent.cpp						\
+					src/Components/Basic/Inverter.cpp					\
+					src/Components/Basic/SoloGate.cpp					\
+					src/Components/ComponentFactory.cpp					\
+					src/Components/InputOutput/Clock.cpp				\
+					src/Components/InputOutput/Constants.cpp			\
+					src/Components/InputOutput/Input.cpp				\
+					src/Components/InputOutput/Output.cpp				\
+					src/Components/MultiGate/Component4069.cpp			\
+					src/Components/MultiGate/QuadGate.cpp				\
+					src/FileParser.cpp									\
+					src/Handler.cpp										\
+					src/main.cpp										\
+					src/Pin/Pin.cpp										\
+					src/Pin/PinLink.cpp										\
+					src/Shell.cpp
 
 INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate
 

@@ -11,9 +11,11 @@ class Pin;
 
 class PinLink {
     public:
-        PinLink();
+        PinLink(Pin *in, Pin *out);
         ~PinLink();
 
+        Pin *getOutput();
+        Pin *getInput();
     protected:
     private:
         Pin *_input;

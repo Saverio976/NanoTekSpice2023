@@ -6,6 +6,8 @@
 */
 
 #include "AComponent.hpp"
+#include <iostream>
+#include "Pin.hpp"
 
 std::ostream & operator <<(std::ostream &os, nts::Tristate val)
 {
@@ -17,4 +19,59 @@ std::ostream & operator <<(std::ostream &os, nts::Tristate val)
         os << "U";
     }
     return os;
+}
+
+void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
+{
+    PinLink link(nullptr, nullptr);
+    Pin *in;
+    Pin *out;
+
+    if ((*this)[pin].getPinType() == other[otherPin].getPinType())
+    {
+        throw std::invalid_argument("Trying to link two pins of same type");
+    }
+    if ((*this)[pin].getPinType() == Pin::INPUT) {
+        in = &(*this)[pin];
+        out = &other[otherPin];
+    } else {
+        in = &other[otherPin];
+        out = &(*this)[pin];
+    }
+    link = PinLink(in, out);
+    in->addLink(link);
+    out->addLink(link);
+}
+
+const Pin &AComponent::operator [](std::size_t index) const
+{
+    if (index == 0) {
+        throw std::invalid_argument("Invalid pin");
+    }
+    if (index - 1 >= _pins.size()) {
+        throw std::out_of_range("Chipset doesn't have enough pins");
+    }
+    return _pins[index - 1];
+}
+
+Pin& AComponent::operator [](std::size_t index)
+{
+    if (index == 0) {
+        throw std::invalid_argument("Invalid pin");
+    }
+    if (index - 1 >= _pins.size()) {
+        throw std::out_of_range("Chipset doesn't have enough pins");
+    }
+    return _pins[index - 1];
+}
+
+void AComponent::simulate(std::size_t tick)
+{
+    if (_lastTick == tick) {
+        return;
+    }
+    _lastTick = tick;
+    for (size_t i = 0; i < _pins.size(); i++) {
+        _pins[i].setValue(this->compute(i + 1));
+    }
 }

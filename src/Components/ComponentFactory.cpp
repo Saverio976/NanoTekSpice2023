@@ -17,6 +17,7 @@
 #include "InputOutput/Constants.hpp"
 #include "InputOutput/Clock.hpp"
 #include "MultiGate/QuadGate.hpp"
+#include "MultiGate/Component4069.hpp"
 
 ComponentFactory::TypeNotInFactory::TypeNotInFactory(const std::string &error):
     _error(error)
@@ -44,7 +45,7 @@ ComponentFactory::ComponentFactory()
     this->registerComponent("4001", new QuadGate<NorGate>);
     this->registerComponent("4011", new QuadGate<NandGate>);
     this->registerComponent("4030", new QuadGate<XorGate>);
-    // TODO: add component 4069
+    this->registerComponent("4069", new Component4069);
     this->registerComponent("4071", new QuadGate<OrGate>);
     // TODO: add all component that we know of
 }

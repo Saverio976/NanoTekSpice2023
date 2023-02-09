@@ -12,6 +12,14 @@ class Handler;
 
 class Shell {
     public:
+        class BadSetValueInput : public std::exception {
+            public:
+                BadSetValueInput(const std::string &error);
+                const char *what() const noexcept override;
+
+            protected:
+                std::string _error;
+        };
         Shell(Handler *handler);
         ~Shell() = default;
 
@@ -28,5 +36,5 @@ class Shell {
         void display() const;
         void simulate();
         void loop();
-        void exit() const;
+        void exit();
 };

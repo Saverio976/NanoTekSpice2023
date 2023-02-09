@@ -12,6 +12,7 @@
 #include "ComponentFactory.hpp"
 #include "FileParser.hpp"
 #include "Handler.hpp"
+#include "IComponent.hpp"
 
 Handler::Handler():
     _shell(this)
@@ -73,4 +74,12 @@ void Handler::addLink(
         throw ChipsetNameNotFoundException("Chipset: " + name1 + " or " + name2);
     }
     this->_components[name1]->setLink(pin1, *this->_components[name2].get(), pin2);
+}
+
+nts::IComponent *Handler::getChipset(const std::string &name)
+{
+    if (this->_components.find(name) == this->_components.end()) {
+        return nullptr;
+    }
+    return this->_components[name].get();
 }

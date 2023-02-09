@@ -43,6 +43,8 @@ class Handler
         void addLink(const std::string &name1, std::size_t pin1,
                       const std::string &name2, std::size_t pin2);
 
+        nts::IComponent *getChipset(const std::string &name);
+
     protected:
     private:
         std::map<std::string, std::unique_ptr<nts::IComponent>> _components;

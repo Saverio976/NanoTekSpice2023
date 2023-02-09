@@ -29,13 +29,13 @@ static nts::Tristate triNot(nts::Tristate v)
 
 nts::Tristate Inverter::compute(std::size_t pin)
 {
-    if (pin == 0) {
+    if (pin == 1) {
         return _pins[0].getValue();
-    } else if (pin == 1) {
+    } else if (pin == 2) {
         _pins[0].simulate(_lastTick);
-        return triNot(_pins[1].getValue());
+        return triNot(_pins[0].getValue());
     }
-    throw std::out_of_range("Chipset doesn't have enough pins");
+    throw std::out_of_range("Inverter: Chipset doesn't have enough pins");
 }
 
 nts::IComponent *Inverter::clone() const

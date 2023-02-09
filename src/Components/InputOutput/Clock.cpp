@@ -21,3 +21,8 @@ nts::IComponent *Clock::clone() const
 {
     return new Clock();
 }
+
+nts::Tristate Clock::getValue()
+{
+    return this->_value;
+}

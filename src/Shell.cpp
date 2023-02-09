@@ -11,7 +11,9 @@
 #include <string>
 #include <iostream>
 #include <functional>
+#include <vector>
 #include "IComponent.hpp"
+#include "IIOComponent.hpp"
 #include "InputOutput/Input.hpp"
 #include "Handler.hpp"
 #include "Shell.hpp"
@@ -96,7 +98,26 @@ void Shell::setInput(const std::string &name, std::size_t value)
 
 void Shell::display() const
 {
-    // TODO:
+    std::vector<std::string> abc;
+    IIOComponent *iiocomponent = nullptr;
+
+    std::cout << "tick: " << this->_handler->getTick() << std::endl;
+    abc = this->_handler->getChipsetNames("input");
+    std::cout << "input(s):" << std::endl;
+    for (const auto &i : abc) {
+        iiocomponent = dynamic_cast<IIOComponent *>(this->_handler->getChipset(i));
+        if (iiocomponent!= nullptr) {
+            std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
+        }
+    }
+    abc = this->_handler->getChipsetNames("output");
+    std::cout << "output(s):" << std::endl;
+    for (const auto &i : abc) {
+        iiocomponent = dynamic_cast<IIOComponent *>(this->_handler->getChipset(i));
+        if (iiocomponent!= nullptr) {
+            std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
+        }
+    }
 }
 
 void Shell::simulate()

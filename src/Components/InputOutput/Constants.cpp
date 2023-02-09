@@ -31,6 +31,11 @@ nts::Tristate True::compute(size_t pin)
     return _pins[0].getValue();
 }
 
+nts::Tristate True::getValue()
+{
+    return this->_pins[0].getValue();
+}
+
 nts::IComponent *True::clone() const
 {
     return new True();
@@ -47,4 +52,9 @@ nts::Tristate False::compute(size_t pin)
 nts::IComponent *False::clone() const
 {
     return new False();
+}
+
+nts::Tristate False::getValue()
+{
+    return this->_pins[0].getValue();
 }

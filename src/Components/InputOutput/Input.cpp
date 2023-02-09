@@ -26,6 +26,12 @@ nts::Tristate Input::compute(std::size_t pin)
     return (*this)[pin].getValue();
 }
 
+nts::Tristate Input::getValue()
+{
+    return this->_pins[0].getValue(); // TODO: choose which one
+    return this->_value; // TODO: choose which one
+}
+
 nts::IComponent *Input::clone() const
 {
     return new Input();

@@ -7,6 +7,7 @@
 
 #pragma once
 //This file and class will need a rename
+#include <cstddef>
 #include <exception>
 #include <vector>
 #include <map>
@@ -39,11 +40,14 @@ class Handler
         void loadFile(const std::string &fileName);
         void readInput();
 
+        std::size_t getTick() const;
+
         void addChipset(const std::string &type, const std::string &name);
         void addLink(const std::string &name1, std::size_t pin1,
                       const std::string &name2, std::size_t pin2);
 
         nts::IComponent *getChipset(const std::string &name);
+        const std::vector<std::string> &getChipsetNames(const std::string &type);
 
     protected:
     private:

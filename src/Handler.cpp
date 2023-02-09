@@ -83,3 +83,16 @@ nts::IComponent *Handler::getChipset(const std::string &name)
     }
     return this->_components[name].get();
 }
+
+std::size_t Handler::getTick() const
+{
+    return this->_tick;
+}
+
+const std::vector<std::string> &Handler::getChipsetNames(const std::string &type)
+{
+    if (this->_specialComponents.find(type) == this->_specialComponents.end()) {
+        throw ChipsetNameNotFoundException("Chipset type " + type + " not found");
+    }
+    return this->_specialComponents[type];
+}

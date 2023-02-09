@@ -12,6 +12,7 @@
 #include <iostream>
 #include <functional>
 #include <vector>
+#include <regex>
 #include "IComponent.hpp"
 #include "IIOComponent.hpp"
 #include "InputOutput/Input.hpp"
@@ -36,25 +37,32 @@ Shell::Shell(Handler *handler):
 std::string Shell::getInputName(const std::string &all) const
 {
     std::string name;
+    std::string rest;
+    std::string intermediate;
+    std::stringstream s;
 
-    name = all.substr(0, all.find('='));
+    intermediate = std::regex_replace(all, std::regex("="), " ");
+    s.str(intermediate);
+    s >> name >> rest;
     return name;
 }
 
 std::size_t Shell::getInputValue(const std::string &all) const
 {
-    std::size_t value;
+    std::string name;
+    std::string valueStr;
+    int value = -1;
     std::stringstream s;
-    std::string strVal;
+    std::string intermediate;
 
-    s.str(all.substr(all.find('=') + 1));
-    s >> strVal;
-    if (strVal == "U") {
+    intermediate = std::regex_replace(all, std::regex("="), " ");
+    s.str(intermediate);
+    s >> name >> valueStr;
+    if (valueStr == "U") {
         return 2;
     }
-    s.exceptions(std::ios::failbit);
-    s >> value;
-    if (value > 1) {
+    value = std::stoi(valueStr);
+    if (value > 1 || value < 0) {
         throw BadSetValueInput("Value must be 0 or 1 or U");
     }
     return value;
@@ -64,6 +72,7 @@ void Shell::mainLoop()
 {
     std::string line;
 
+    std::cout << "> ";
     while (!this->_isEnd && std::getline(std::cin, line)) {
         if (line.find('=') != line.npos) {
             this->setInput(this->getInputName(line), this->getInputValue(line));
@@ -74,6 +83,7 @@ void Shell::mainLoop()
         } else if (line == "exit") {
             this->exit();
         }
+        std::cout << "> ";
         // TODO: what to do if unknow command ?
     }
 }

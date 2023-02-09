@@ -14,5 +14,6 @@ int main(int argc, const char *const argv[])
     if (argc > 1) {
         handler.loadFile(argv[1]);
     }
+    handler.readInput();
     return 0;
 }

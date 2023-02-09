@@ -53,7 +53,7 @@ class Handler
     private:
         std::map<std::string, std::unique_ptr<nts::IComponent>> _components;
         std::map<std::string, std::vector<std::string>> _specialComponents;
-        std::size_t _tick;
+        std::size_t _tick = 0;
         Shell _shell;
         ComponentFactory _componentFactory;
 };

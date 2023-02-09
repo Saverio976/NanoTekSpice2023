@@ -24,5 +24,5 @@ nts::IComponent *Clock::clone() const
 
 nts::Tristate Clock::getValue()
 {
-    return this->_value;
+    return this->_pins[0].getValue();;
 }

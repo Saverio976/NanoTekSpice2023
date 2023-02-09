@@ -15,7 +15,6 @@ RESET 			= 	\033[0m
 
 TARGET 			= 	nanotekspice
 
-<<<<<<< HEAD
 SRC 			=	src/main.cpp								\
 					src/Handler.cpp								\
 					src/Pin/Pin.cpp								\

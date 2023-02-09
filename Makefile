@@ -24,6 +24,7 @@ SRC 			=	src/main.cpp								\
 					src/Components/InputOutput/Constants.cpp	\
 					src/Components/InputOutput/Input.cpp		\
 					src/Components/InputOutput/Output.cpp		\
+					src/Components/MultiGate/QuadGate.cpp		\
 					src/Components/ComponentFactory.cpp			\
 					src/Pin/Pin.cpp								\
 					src/Pin/PinLink.cpp							\

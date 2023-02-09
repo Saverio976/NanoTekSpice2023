@@ -6,9 +6,11 @@
 */
 
 #pragma once
+#include <array>
+#include "IComponent.hpp"
+#include "Pin.hpp"
 #include "AComponent.hpp"
 #include "SoloGate.hpp"
-#include <array>
 
 template <typename T>
 class QuadGate: public AComponent {
@@ -29,7 +31,7 @@ class QuadGate: public AComponent {
             }
         }
 
-        inline nts::IComponent *clone() const {return new QuadGate<T>;}
+        inline nts::IComponent *clone() const override {return new QuadGate<T>;}
 
         Pin &operator [](std::size_t pin) override
         {

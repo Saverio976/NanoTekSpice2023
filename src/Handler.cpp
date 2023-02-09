@@ -96,3 +96,15 @@ const std::vector<std::string> &Handler::getChipsetNames(const std::string &type
     }
     return this->_specialComponents[type];
 }
+
+void Handler::incrementTick()
+{
+    this->_tick += 1;
+}
+
+void Handler::syncChipsetTick()
+{
+    for (auto &chipset : this->_components) {
+        chipset.second->simulate(this->getTick());
+    }
+}

@@ -16,6 +16,7 @@
 #include "IComponent.hpp"
 #include "IIOComponent.hpp"
 #include "InputOutput/Input.hpp"
+#include "InputOutput/Output.hpp"
 #include "Handler.hpp"
 #include "Shell.hpp"
 
@@ -132,7 +133,17 @@ void Shell::display() const
 
 void Shell::simulate()
 {
-    // TODO:
+    std::vector<std::string> abc = this->_handler->getChipsetNames("output");
+    Output *output = nullptr;
+
+    this->_handler->incrementTick();
+    for (auto &i : abc) {
+        output = dynamic_cast<Output *>(this->_handler->getChipset(i));
+        if (output!= nullptr) {
+            output->simulate(this->_handler->getTick());
+        }
+    }
+    this->_handler->syncChipsetTick();
 }
 
 void Shell::loop()

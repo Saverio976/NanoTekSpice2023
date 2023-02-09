@@ -41,6 +41,8 @@ class Handler
         void readInput();
 
         std::size_t getTick() const;
+        void incrementTick();
+        void syncChipsetTick();
 
         void addChipset(const std::string &type, const std::string &name);
         void addLink(const std::string &name1, std::size_t pin1,

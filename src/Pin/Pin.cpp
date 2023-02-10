@@ -30,7 +30,7 @@ nts::IComponent& Pin::getParent()
     return _parent;
 }
 
-nts::Tristate Pin::getValue()
+nts::Tristate Pin::getValue() // If want to only update on simulate, comment every but return value and change simulate
 {
     if (getPinType() == OUTPUT) {
         return _value;
@@ -60,11 +60,12 @@ void Pin::addLink(PinLink link)
     _links.push_back(link);
 }
 
-void Pin::simulate(size_t tick)
+void Pin::simulate(size_t tick) // If want change on only simulate uncomment line 68 and modify getValue
 {
     if (getPinType() == INPUT) {
         if (getSource() != nullptr) {
             getSource()->simulate(tick);
+            // setValue(getSource()->getValue());
         }
     } else {
         getParent().simulate(tick);

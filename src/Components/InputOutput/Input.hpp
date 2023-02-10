@@ -22,5 +22,4 @@ class Input: public IIOComponent {
 
     protected:
         nts::Tristate _value = nts::Undefined;
-
 };

@@ -7,6 +7,7 @@
 
 #include <cstddef>
 #include <fstream>
+#include <map>
 #include <sstream>
 #include <string>
 #include "ComponentFactory.hpp"
@@ -51,6 +52,14 @@ void Handler::loadFile(const std::string &fileName)
 
 void Handler::addChipset(const std::string &type, const std::string &name)
 {
+    std::map<std::string, std::string> choices = {
+        {"input", "inputDisplay"},
+        {"clock", "inputDisplay"},
+        {"true", "inputDisplay"},
+        {"false", "inputDisplay"},
+        {"output", "outputDisplay"},
+    };
+
     if (this->_components.find(name) != this->_components.end()) {
         throw ChipsetAlreadyCreatedException("Chipset: " + name);
     }
@@ -59,6 +68,12 @@ void Handler::addChipset(const std::string &type, const std::string &name)
         this->_specialComponents[type] = {};
     }
     this->_specialComponents[type].push_back(name);
+    if (choices.find(type) != choices.end()) {
+        if (this->_specialComponents.find(choices[type]) == this->_specialComponents.end()) {
+            this->_specialComponents[choices[type]] = {};
+        }
+        this->_specialComponents[choices[type]].push_back(name);
+    }
 }
 
 void Handler::addLink(

@@ -8,9 +8,13 @@
 #include "Clock.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
+#include <iostream>
 
 void Clock::simulate(std::size_t tick)
 {
+    if (this->_lastTick == tick) {
+        return;
+    }
     if (_value != nts::Undefined) {
         _value = (nts::Tristate)!_value;
     }
@@ -24,5 +28,5 @@ nts::IComponent *Clock::clone() const
 
 nts::Tristate Clock::getValue()
 {
-    return this->_pins[0].getValue();;
+    return this->_pins[0].getValue();
 }

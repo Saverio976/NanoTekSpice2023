@@ -6,6 +6,7 @@
 //
 
 #include <cstddef>
+#include <csignal>
 #include <map>
 #include <sstream>
 #include <string>
@@ -19,6 +20,8 @@
 #include "InputOutput/Output.hpp"
 #include "Handler.hpp"
 #include "Shell.hpp"
+
+bool Shell::_endLoop = false;
 
 Shell::BadSetValueInput::BadSetValueInput(const std::string &error):
     _error(error)
@@ -83,6 +86,8 @@ void Shell::mainLoop()
             this->simulate();
         } else if (line == "exit") {
             this->exit();
+        } else if (line == "loop") {
+            this->loop();
         }
         std::cout << "> ";
         // TODO: what to do if unknow command ?
@@ -107,28 +112,31 @@ void Shell::setInput(const std::string &name, std::size_t value)
     iinput->setValue(choices[value]);
 }
 
-void Shell::display() const
+static void displayType(const std::string &type, Handler *handler)
 {
     std::vector<std::string> abc;
     IIOComponent *iiocomponent = nullptr;
 
+    try {
+        abc = handler->getChipsetNames(type);
+    } catch (const std::exception &e) {
+        abc = {};
+    }
+    for (const auto &i : abc) {
+        iiocomponent = dynamic_cast<IIOComponent *>(handler->getChipset(i));
+        if (iiocomponent!= nullptr) {
+            std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
+        }
+    }
+}
+
+void Shell::display() const
+{
     std::cout << "tick: " << this->_handler->getTick() << std::endl;
-    abc = this->_handler->getChipsetNames("input");
     std::cout << "input(s):" << std::endl;
-    for (const auto &i : abc) {
-        iiocomponent = dynamic_cast<IIOComponent *>(this->_handler->getChipset(i));
-        if (iiocomponent!= nullptr) {
-            std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
-        }
-    }
-    abc = this->_handler->getChipsetNames("output");
+    displayType("inputDisplay", this->_handler);
     std::cout << "output(s):" << std::endl;
-    for (const auto &i : abc) {
-        iiocomponent = dynamic_cast<IIOComponent *>(this->_handler->getChipset(i));
-        if (iiocomponent!= nullptr) {
-            std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
-        }
-    }
+    displayType("outputDisplay", this->_handler);
 }
 
 void Shell::simulate()
@@ -146,9 +154,25 @@ void Shell::simulate()
     this->_handler->syncChipsetTick();
 }
 
+void Shell::setIsEndLoop(bool isEndLoop)
+{
+    Shell::_endLoop = isEndLoop;
+}
+
+static void signal_handler(__attribute__((unused)) int _)
+{
+    Shell::setIsEndLoop(true);
+}
+
 void Shell::loop()
 {
-    // TODO:
+    std::signal(SIGINT, signal_handler);
+    this->setIsEndLoop(false);
+    while (Shell::_endLoop == false) {
+        this->simulate();
+        this->display();
+    }
+    std::signal(SIGINT, SIG_DFL);
 }
 
 void Shell::exit()

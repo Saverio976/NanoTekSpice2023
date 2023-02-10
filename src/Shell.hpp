@@ -24,6 +24,7 @@ class Shell {
         ~Shell() = default;
 
         void mainLoop();
+        static void setIsEndLoop(bool isEndLoop);
 
     private:
         bool _isEnd = false;
@@ -37,4 +38,5 @@ class Shell {
         void simulate();
         void loop();
         void exit();
+        static bool _endLoop;
 };

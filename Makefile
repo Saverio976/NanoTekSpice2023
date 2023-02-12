@@ -65,5 +65,5 @@ fclean: clean
 
 re: fclean $(TARGET)
 
-tests_run:
+tests_run: $(OBJ)
 	bash tests/functional/base_components.bash

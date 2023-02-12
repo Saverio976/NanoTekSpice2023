@@ -9,6 +9,7 @@
 #include <csignal>
 #include <map>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <iostream>
 #include <functional>
@@ -88,9 +89,10 @@ void Shell::mainLoop()
             this->exit();
         } else if (line == "loop") {
             this->loop();
+        } else {
+            throw std::invalid_argument("Unknown command. Available commands are: display, simulate, loop, exit. Or you can set value of input using in_name=...");
         }
         std::cout << "> ";
-        // TODO: what to do if unknow command ?
     }
 }
 

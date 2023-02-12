@@ -6,6 +6,7 @@
 */
 
 #include "Input.hpp"
+#include "IComponent.hpp"
 #include "Pin.hpp"
 
 Input::Input()
@@ -23,4 +24,14 @@ nts::Tristate Input::compute(std::size_t pin)
 {
     (*this)[pin].setValue(_value);
     return (*this)[pin].getValue();
+}
+
+nts::Tristate Input::getValue()
+{
+    return this->_pins[0].getValue();
+}
+
+nts::IComponent *Input::clone() const
+{
+    return new Input();
 }

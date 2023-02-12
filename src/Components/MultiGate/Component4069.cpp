@@ -5,9 +5,9 @@
 ** Component4069
 */
 
-#include "Component4069.hpp"
-#include "Pin.hpp"
 #include <iostream>
+#include "Pin.hpp"
+#include "Component4069.hpp"
 
 nts::Tristate Component4069::compute(std::size_t pin)
 {

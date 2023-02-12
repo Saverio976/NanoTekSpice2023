@@ -63,7 +63,7 @@ fclean: clean
 	rm -f $(TARGET)
 	@echo -e "$(LIGHT_GREEN)Removed target file$(RESET)"
 
-re: clean $(TARGET)
+re: fclean $(TARGET)
 
-tests_run: $(OBJ)
+tests_run:
 	bash tests/functional/base_components.bash

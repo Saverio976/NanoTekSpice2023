@@ -5,7 +5,15 @@
 ** main
 */
 
-int main()
+#include "Handler.hpp"
+
+int main(int argc, const char *const argv[])
 {
+    Handler handler;
+
+    if (argc > 1) {
+        handler.loadFile(argv[1]);
+    }
+    handler.readInput();
     return 0;
 }

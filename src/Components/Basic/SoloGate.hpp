@@ -6,7 +6,9 @@
 */
 
 #pragma once
+#include "Pin.hpp"
 #include "AComponent.hpp"
+#include "IComponent.hpp"
 
 
 class SoloGate: public AComponent {
@@ -21,30 +23,40 @@ class SoloGate: public AComponent {
 
 class AndGate: public SoloGate
 {
+    public:
+        nts::IComponent *clone() const final;
     private:
         nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
 };
 
 class OrGate: public SoloGate
 {
+    public:
+        nts::IComponent *clone() const final;
     private:
         nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
 };
 
 class XorGate: public SoloGate
 {
+    public:
+        nts::IComponent *clone() const final;
     private:
         nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
 };
 
 class NorGate: public SoloGate
 {
+    public:
+        nts::IComponent *clone() const final;
     private:
         nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
 };
 
 class NandGate: public SoloGate
 {
+    public:
+        nts::IComponent *clone() const final;
     private:
         nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
 };

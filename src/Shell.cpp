@@ -5,6 +5,7 @@
 // Shell
 //
 
+#include <algorithm>
 #include <cstddef>
 #include <csignal>
 #include <map>
@@ -124,6 +125,9 @@ static void displayType(const std::string &type, Handler *handler)
     } catch (const std::exception &e) {
         chipsets = {};
     }
+
+    std::sort(chipsets.begin(), chipsets.end());
+
     for (const auto &i : chipsets) {
         iiocomponent = dynamic_cast<IIOComponent *>(handler->getChipset(i));
         if (iiocomponent!= nullptr) {

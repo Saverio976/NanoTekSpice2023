@@ -123,3 +123,10 @@ void Handler::syncChipsetTick()
         chipset.second->simulate(this->getTick());
     }
 }
+
+void Handler::checkGoodParsing() const
+{
+    if (this->_components.empty()) {
+        throw ChipsetNameNotFoundException("No chipset found"); 
+    }
+}

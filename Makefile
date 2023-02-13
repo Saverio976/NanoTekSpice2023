@@ -24,7 +24,6 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Components/InputOutput/Input.cpp				\
 					src/Components/InputOutput/Output.cpp				\
 					src/Components/MultiGate/Component4069.cpp			\
-					src/Components/MultiGate/QuadGate.cpp				\
 					src/FileParser.cpp									\
 					src/Handler.cpp										\
 					src/main.cpp										\

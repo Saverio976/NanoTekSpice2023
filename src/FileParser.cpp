@@ -67,7 +67,7 @@ void FileParser::loadFile(const std::string &fileName)
     while (std::getline(f, line)) {
         std::string rightPart;
         std::string leftPart;
-        std::string rest;
+        std::string remainder;
         std::stringstream linestream(line);
         if (line.starts_with("#") || line == "") {
             continue;
@@ -79,10 +79,10 @@ void FileParser::loadFile(const std::string &fileName)
             type = LINKS;
             continue;
         }
-        linestream >> leftPart >> rightPart >> rest;
-        if (rest != "") {
+        linestream >> leftPart >> rightPart >> remainder;
+        if (remainder != "") {
             linestream.rdbuf();
-            linestream << "Bad Line in " << type << ": " << rest;
+            linestream << "Bad Line in " << type << ": " << remainder;
             throw FileParsingError(linestream.str());
         }
         if (type == CHIPSETS) {
@@ -97,4 +97,5 @@ void FileParser::loadFile(const std::string &fileName)
     if (!f.eof()) {
         throw FileParsingError("Unable to read file " + fileName);
     }
+    this->_handler->checkGoodParsing();
 }

@@ -10,6 +10,7 @@
 #include <csignal>
 #include <map>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <iostream>
 #include <functional>
@@ -89,9 +90,10 @@ void Shell::mainLoop()
             this->exit();
         } else if (line == "loop") {
             this->loop();
+        } else {
+            throw std::invalid_argument("Unknown command. Available commands are: display, simulate, loop, exit. Or you can set value of input using in_name=...");
         }
         std::cout << "> ";
-        // TODO: what to do if unknow command ?
     }
 }
 
@@ -115,16 +117,18 @@ void Shell::setInput(const std::string &name, std::size_t value)
 
 static void displayType(const std::string &type, Handler *handler)
 {
-    std::vector<std::string> abc;
+    std::vector<std::string> chipsets;
     IIOComponent *iiocomponent = nullptr;
 
     try {
-        abc = handler->getChipsetNames(type);
+        chipsets = handler->getChipsetNames(type);
     } catch (const std::exception &e) {
-        abc = {};
+        chipsets = {};
     }
-    std::sort(abc.begin(), abc.end());
-    for (const auto &i : abc) {
+
+    std::sort(chipsets.begin(), chipsets.end());
+
+    for (const auto &i : chipsets) {
         iiocomponent = dynamic_cast<IIOComponent *>(handler->getChipset(i));
         if (iiocomponent!= nullptr) {
             std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
@@ -143,11 +147,11 @@ void Shell::display() const
 
 void Shell::simulate()
 {
-    std::vector<std::string> abc = this->_handler->getChipsetNames("output");
+    std::vector<std::string> chipsets = this->_handler->getChipsetNames("output");
     Output *output = nullptr;
 
     this->_handler->incrementTick();
-    for (auto &i : abc) {
+    for (auto &i : chipsets) {
         output = dynamic_cast<Output *>(this->_handler->getChipset(i));
         if (output!= nullptr) {
             output->simulate(this->_handler->getTick());

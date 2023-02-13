@@ -12,7 +12,6 @@ namespace nts::component::IO
 {
     Output::Output()
     {
-        _lastTick = 0;
         _pins.push_back(Pin(*this, Pin::INPUT, 1));
     }
 

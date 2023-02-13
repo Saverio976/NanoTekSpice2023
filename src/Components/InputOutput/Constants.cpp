@@ -13,14 +13,12 @@ namespace nts::component::IO
     {
     TrueInput::TrueInput()
     {
-        _lastTick = 0;
         _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
         _pins[0].setValue(nts::True);
     }
 
     FalseInput::FalseInput()
     {
-        _lastTick = 0;
         _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
         _pins[0].setValue(nts::False);
     }

@@ -20,7 +20,7 @@ namespace nts::component
             nts::Pin &operator [](std::size_t index) override;
         protected:
             std::vector<Pin> _pins;
-            std::size_t _lastTick;
+            std::size_t _lastTick = 0;
     };
 }
 

@@ -14,7 +14,6 @@
 namespace nts::component {
     SoloGate::SoloGate()
     {
-        _lastTick = 0;
         _pins.push_back(Pin(*this, Pin::INPUT, 1));
         _pins.push_back(Pin(*this, Pin::INPUT, 2));
         _pins.push_back(Pin(*this, Pin::OUTPUT, 3));

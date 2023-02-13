@@ -38,6 +38,7 @@ class Handler
         Handler();
 
         void loadFile(const std::string &fileName);
+        void checkGoodParsing() const;
         void readInput();
 
         std::size_t getTick() const;

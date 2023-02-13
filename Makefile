@@ -54,7 +54,10 @@ $(TARGET): $(OBJ)
 	&& echo -e "[$(MAGENTA)compiled$(RESET)] $^ => $@"\
 	|| echo -e "[$(RED)error$(RESET)]" $^
 
-.PHONY : all clean fclean re
+.PHONY : all clean fclean re doxygen
+
+doxygen:
+	doxygen bonus/Doxyfile
 
 clean:
 	@rm -f $(OBJ)

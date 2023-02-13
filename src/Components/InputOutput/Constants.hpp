@@ -10,24 +10,25 @@
 #include "IIOComponent.hpp"
 #include "Pin.hpp"
 #include "AComponent.hpp"
+namespace nts::component::IO
+{
+    class TrueInput: public IIOComponent {
+        public:
+            TrueInput();
+            nts::Tristate compute(size_t pin) override;
 
-class True: public IIOComponent {
-    public:
-        True();
-        nts::Tristate compute(size_t pin) override;
+            nts::Tristate getValue() override;
 
-        nts::Tristate getValue() override;
+            nts::IComponent *clone() const final;
+    };
 
-        nts::IComponent *clone() const final;
-};
+    class FalseInput: public IIOComponent {
+        public:
+            FalseInput();
+            nts::Tristate compute(size_t pin) override;
 
-class False: public IIOComponent {
-    public:
-        False();
-        nts::Tristate compute(size_t pin) override;
+            nts::Tristate getValue() override;
 
-        nts::Tristate getValue() override;
-
-        nts::IComponent *clone() const final;
-};
-
+            nts::IComponent *clone() const final;
+    };
+}

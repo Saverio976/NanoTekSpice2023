@@ -10,10 +10,13 @@
 #include "Pin.hpp"
 #include "AComponent.hpp"
 
-class Inverter: public AComponent {
-    public:
-        Inverter();
-        nts::Tristate compute(std::size_t pin) override;
+namespace nts::component
+{
+    class Inverter: public AComponent {
+        public:
+            Inverter();
+            nts::Tristate compute(std::size_t pin) override;
 
-        nts::IComponent *clone() const final;
-};
+            nts::IComponent *clone() const final;
+    };
+}

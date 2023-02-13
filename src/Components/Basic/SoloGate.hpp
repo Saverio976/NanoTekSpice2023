@@ -10,53 +10,55 @@
 #include "AComponent.hpp"
 #include "IComponent.hpp"
 
-
-class SoloGate: public AComponent {
-    public:
-        SoloGate();
-        nts::Tristate compute(std::size_t pin) override;
-
-    protected:
-    private:
-        virtual nts::Tristate operation(nts::Tristate left, nts::Tristate right) = 0;
-};
-
-class AndGate: public SoloGate
+namespace nts::component
 {
-    public:
-        nts::IComponent *clone() const final;
-    private:
-        nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
-};
+    class SoloGate: public AComponent {
+        public:
+            SoloGate();
+            nts::Tristate compute(std::size_t pin) override;
 
-class OrGate: public SoloGate
-{
-    public:
-        nts::IComponent *clone() const final;
-    private:
-        nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
-};
+        protected:
+        private:
+            virtual nts::Tristate operation(nts::Tristate left, nts::Tristate right) = 0;
+    };
 
-class XorGate: public SoloGate
-{
-    public:
-        nts::IComponent *clone() const final;
-    private:
-        nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
-};
+    class AndGate: public SoloGate
+    {
+        public:
+            nts::IComponent *clone() const final;
+        private:
+            nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
+    };
 
-class NorGate: public SoloGate
-{
-    public:
-        nts::IComponent *clone() const final;
-    private:
-        nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
-};
+    class OrGate: public SoloGate
+    {
+        public:
+            nts::IComponent *clone() const final;
+        private:
+            nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
+    };
 
-class NandGate: public SoloGate
-{
-    public:
-        nts::IComponent *clone() const final;
-    private:
-        nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
-};
+    class XorGate: public SoloGate
+    {
+        public:
+            nts::IComponent *clone() const final;
+        private:
+            nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
+    };
+
+    class NorGate: public SoloGate
+    {
+        public:
+            nts::IComponent *clone() const final;
+        private:
+            nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
+    };
+
+    class NandGate: public SoloGate
+    {
+        public:
+            nts::IComponent *clone() const final;
+        private:
+            nts::Tristate operation(nts::Tristate left, nts::Tristate right) override;
+    };
+}

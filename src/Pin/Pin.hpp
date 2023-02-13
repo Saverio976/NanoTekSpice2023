@@ -19,29 +19,32 @@
 #include "IComponent.hpp"
 #include "PinLink.hpp"
 
-class Pin
+namespace nts
 {
-    public:
-        enum PinType {
-            INPUT,
-            OUTPUT,
-            BRIDGE
-        };
+    class Pin
+    {
+        public:
+            enum PinType {
+                INPUT,
+                OUTPUT,
+                BRIDGE
+            };
 
-        Pin(nts::IComponent &, PinType, size_t);
+            Pin(nts::IComponent &, PinType, size_t);
 
-        Pin *getSource();
-        nts::IComponent &getParent();
-        nts::Tristate getValue();
-        PinType getPinType() const;
-        void setValue(nts::Tristate);
-        void addLink(PinLink link);
-        void simulate(size_t tick);
+            Pin *getSource();
+            nts::IComponent &getParent();
+            nts::Tristate getValue();
+            PinType getPinType() const;
+            void setValue(nts::Tristate);
+            void addLink(PinLink link);
+            void simulate(size_t tick);
 
-    private:
-        const PinType _type;
-        nts::IComponent &_parent;
-        const size_t _index;
-        nts::Tristate _value = nts::Undefined;
-        std::vector<PinLink> _links;
-};
+        private:
+            const PinType _type;
+            nts::IComponent &_parent;
+            const size_t _index;
+            nts::Tristate _value = nts::Undefined;
+            std::vector<PinLink> _links;
+    };
+}

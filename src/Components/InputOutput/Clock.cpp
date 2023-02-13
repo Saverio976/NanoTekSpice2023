@@ -10,23 +10,26 @@
 #include "Pin.hpp"
 #include <iostream>
 
-void Clock::simulate(std::size_t tick)
+namespace nts::component::IO
 {
-    if (this->_lastTick == tick) {
-        return;
+    void Clock::simulate(std::size_t tick)
+    {
+        if (this->_lastTick == tick) {
+            return;
+        }
+        if (_value != nts::Undefined) {
+            _value = (nts::Tristate)!_value;
+        }
+        AComponent::simulate(tick);
     }
-    if (_value != nts::Undefined) {
-        _value = (nts::Tristate)!_value;
+
+    nts::IComponent *Clock::clone() const
+    {
+        return new Clock();
     }
-    AComponent::simulate(tick);
-}
 
-nts::IComponent *Clock::clone() const
-{
-    return new Clock();
-}
-
-nts::Tristate Clock::getValue()
-{
-    return this->_pins[0].getValue();
+    nts::Tristate Clock::getValue()
+    {
+        return this->_pins[0].getValue();
+    }
 }

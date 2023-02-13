@@ -19,24 +19,24 @@ nts::Tristate conv(int i)
 
 int table()
 {
-    Input i1;
-    Input i2;
-    Clock c;
-    True t;
-    False f;
-    Output o1;
-    Output o2;
-    Output o3;
-    Output o4;
-    Output o5;
-    Output o6;
-    Output o7;
-    Output o8;
-    AndGate g1;
-    OrGate g2;
-    XorGate g3;
-    NandGate g4;
-    NorGate g5;
+    nts::component::IO::Input i1;
+    nts::component::IO::Input i2;
+    nts::component::IO::Clock c;
+    nts::component::IO::TrueInput t;
+    nts::component::IO::FalseInput f;
+    nts::component::IO::Output o1;
+    nts::component::IO::Output o2;
+    nts::component::IO::Output o3;
+    nts::component::IO::Output o4;
+    nts::component::IO::Output o5;
+    nts::component::IO::Output o6;
+    nts::component::IO::Output o7;
+    nts::component::IO::Output o8;
+    nts::component::AndGate g1;
+    nts::component::OrGate g2;
+    nts::component::XorGate g3;
+    nts::component::NandGate g4;
+    nts::component::NorGate g5;
     size_t tick = 1;
 
     c.setValue(nts::False);

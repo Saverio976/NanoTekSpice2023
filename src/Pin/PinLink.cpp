@@ -7,22 +7,25 @@
 
 #include "PinLink.hpp"
 
-PinLink::PinLink(Pin *in, Pin *out)
+namespace nts
 {
-    _input = in;
-    _output = out;
-}
+    PinLink::PinLink(Pin *in, Pin *out)
+    {
+        _input = in;
+        _output = out;
+    }
 
-PinLink::~PinLink()
-{
-}
+    PinLink::~PinLink()
+    {
+    }
 
-Pin* PinLink::getOutput()
-{
-    return _output;
-}
+    Pin* PinLink::getOutput()
+    {
+        return _output;
+    }
 
-Pin* PinLink::getInput()
-{
-    return _input;
+    Pin* PinLink::getInput()
+    {
+        return _input;
+    }
 }

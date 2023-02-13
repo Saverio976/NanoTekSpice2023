@@ -10,16 +10,18 @@
 #include "IIOComponent.hpp"
 #include "Pin.hpp"
 #include "AComponent.hpp"
+namespace nts::component::IO
+{
+    class Input: public IIOComponent {
+        public:
+            Input();
+            void setValue(nts::Tristate);
+            nts::Tristate compute(std::size_t pin) override;
+            nts::Tristate getValue() override;
 
-class Input: public IIOComponent {
-    public:
-        Input();
-        void setValue(nts::Tristate);
-        nts::Tristate compute(std::size_t pin) override;
-        nts::Tristate getValue() override;
+            nts::IComponent *clone() const override;
 
-        nts::IComponent *clone() const override;
-
-    protected:
-        nts::Tristate _value = nts::Undefined;
-};
+        protected:
+            nts::Tristate _value = nts::Undefined;
+    };
+}

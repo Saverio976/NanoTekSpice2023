@@ -9,52 +9,53 @@
 #include "IComponent.hpp"
 #include "Pin.hpp"
 
-True::True()
-{
-    _lastTick = 0;
-    _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
-    _pins[0].setValue(nts::True);
-}
-
-False::False()
-{
-    _lastTick = 0;
-    _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
-    _pins[0].setValue(nts::False);
-}
-
-nts::Tristate True::compute(size_t pin)
-{
-    if (pin != 1) {
-        throw std::out_of_range("Chipset doesn't have enough pins");
+namespace nts::component::IO
+    {
+    TrueInput::TrueInput()
+    {
+        _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
+        _pins[0].setValue(nts::True);
     }
-    return _pins[0].getValue();
-}
 
-nts::Tristate True::getValue()
-{
-    return this->_pins[0].getValue();
-}
-
-nts::IComponent *True::clone() const
-{
-    return new True();
-}
-
-nts::Tristate False::compute(size_t pin)
-{
-    if (pin != 1) {
-        throw std::out_of_range("Chipset doesn't have enough pins");
+    FalseInput::FalseInput()
+    {
+        _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
+        _pins[0].setValue(nts::False);
     }
-    return _pins[0].getValue();
-}
 
-nts::IComponent *False::clone() const
-{
-    return new False();
-}
+    nts::Tristate TrueInput::compute(size_t pin)
+    {
+        if (pin != 1) {
+            throw std::out_of_range("Chipset doesn't have enough pins");
+        }
+        return _pins[0].getValue();
+    }
 
-nts::Tristate False::getValue()
-{
-    return this->_pins[0].getValue();
+    nts::Tristate TrueInput::getValue()
+    {
+        return this->_pins[0].getValue();
+    }
+
+    nts::IComponent *TrueInput::clone() const
+    {
+        return new TrueInput();
+    }
+
+    nts::Tristate FalseInput::compute(size_t pin)
+    {
+        if (pin != 1) {
+            throw std::out_of_range("Chipset doesn't have enough pins");
+        }
+        return _pins[0].getValue();
+    }
+
+    nts::IComponent *FalseInput::clone() const
+    {
+        return new FalseInput();
+    }
+
+    nts::Tristate FalseInput::getValue()
+    {
+        return this->_pins[0].getValue();
+    }
 }

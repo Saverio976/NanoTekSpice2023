@@ -8,35 +8,39 @@
 #pragma once
 
 #include <string>
-class Handler;
 
-class Shell {
-    public:
-        class BadSetValueInput : public std::exception {
-            public:
-                BadSetValueInput(const std::string &error);
-                const char *what() const noexcept override;
+namespace nts
+{
+    class Handler;
 
-            protected:
-                std::string _error;
-        };
-        Shell(Handler *handler);
-        ~Shell() = default;
+    class Shell {
+        public:
+            class BadSetValueInput : public std::exception {
+                public:
+                    BadSetValueInput(const std::string &error);
+                    const char *what() const noexcept override;
 
-        void mainLoop();
-        static void setIsEndLoop(bool isEndLoop);
+                protected:
+                    std::string _error;
+            };
+            Shell(Handler *handler);
+            ~Shell() = default;
 
-    private:
-        bool _isEnd = false;
-        Handler *_handler;
+            void mainLoop();
+            static void setIsEndLoop(bool isEndLoop);
 
-        std::string getInputName(const std::string &all) const;
-        std::size_t getInputValue(const std::string &all) const;
+        private:
+            bool _isEnd = false;
+            Handler *_handler;
 
-        void setInput(const std::string &name, std::size_t value);
-        void display() const;
-        void simulate();
-        void loop();
-        void exit();
-        static bool _endLoop;
-};
+            std::string getInputName(const std::string &all) const;
+            std::size_t getInputValue(const std::string &all) const;
+
+            void setInput(const std::string &name, std::size_t value);
+            void display() const;
+            void simulate();
+            void loop();
+            void exit();
+            static bool _endLoop;
+    };
+}

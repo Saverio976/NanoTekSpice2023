@@ -23,4 +23,5 @@ g++ src/Components/AComponent.o                        \
 ./base_comp.out > tests/functional/tmp.txt
 diff tests/functional/table_result.txt tests/functional/tmp.txt --color
 echo "base components: OK"
+rm -f base_comp.out
 rm -f tests/functional/tmp.txt

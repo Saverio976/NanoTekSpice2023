@@ -10,7 +10,7 @@
 
 int main(int argc, const char *const argv[])
 {
-    Handler handler;
+    nts::Handler handler;
 
     if (argc != 2) {
         return 84;

@@ -11,7 +11,7 @@
 #include <iostream>
 #include "PinLink.hpp"
 
-namespace nts {
+namespace nts::component {
     SoloGate::SoloGate()
     {
         _lastTick = 0;

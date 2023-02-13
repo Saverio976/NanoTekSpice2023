@@ -10,7 +10,7 @@
 #include "Pin.hpp"
 #include "AComponent.hpp"
 
-namespace nts
+namespace nts::component
 {
     class Inverter: public AComponent {
         public:

@@ -9,7 +9,7 @@
 #include "IComponent.hpp"
 #include "Input.hpp"
 
-namespace nts
+namespace nts::component::IO
 {
     class Clock: public Input {
         public:

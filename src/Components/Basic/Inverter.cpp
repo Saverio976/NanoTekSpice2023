@@ -9,7 +9,7 @@
 #include "Pin.hpp"
 #include "Inverter.hpp"
 
-namespace nts {
+namespace nts::component {
     Inverter::Inverter()
     {
         _lastTick = 0;

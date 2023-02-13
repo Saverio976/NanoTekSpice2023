@@ -10,7 +10,7 @@
 #include "AComponent.hpp"
 #include "IComponent.hpp"
 
-namespace nts
+namespace nts::component
 {
     class SoloGate: public AComponent {
         public:

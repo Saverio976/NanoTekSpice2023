@@ -11,7 +11,7 @@
 #include <string>
 #include "IComponent.hpp"
 
-namespace nts
+namespace nts::component
 {
     class ComponentFactory {
         public:

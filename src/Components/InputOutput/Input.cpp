@@ -8,7 +8,7 @@
 #include "Input.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
-namespace nts
+namespace nts::component::IO
 {
     Input::Input()
     {

@@ -19,7 +19,7 @@
 #include "MultiGate/QuadGate.hpp"
 #include "MultiGate/Component4069.hpp"
 
-namespace nts
+namespace nts::component
 {
     ComponentFactory::TypeNotInFactory::TypeNotInFactory(const std::string &error):
         _error(error)
@@ -39,11 +39,11 @@ namespace nts
         this->registerComponent("nor", new NorGate);
         this->registerComponent("nand", new NandGate);
         this->registerComponent("not", new Inverter);
-        this->registerComponent("input", new Input);
-        this->registerComponent("output", new Output);
-        this->registerComponent("false", new FalseInput);
-        this->registerComponent("true", new TrueInput);
-        this->registerComponent("clock", new Clock);
+        this->registerComponent("input", new IO::Input);
+        this->registerComponent("output", new IO::Output);
+        this->registerComponent("false", new IO::FalseInput);
+        this->registerComponent("true", new IO::TrueInput);
+        this->registerComponent("clock", new IO::Clock);
         this->registerComponent("4001", new QuadGate<NorGate>);
         this->registerComponent("4011", new QuadGate<NandGate>);
         this->registerComponent("4030", new QuadGate<XorGate>);

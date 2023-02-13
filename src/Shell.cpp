@@ -103,7 +103,7 @@ namespace nts
     {
         std::stringstream linestream;
         nts::IComponent *icomp = this->_handler->getChipset(name);
-        Input *iinput = dynamic_cast<Input *>(icomp);
+        component::IO::Input *iinput = dynamic_cast<component::IO::Input *>(icomp);
         std::map<std::size_t, nts::Tristate> choices = {
             {0, nts::False},
             {1, nts::True},
@@ -120,7 +120,7 @@ namespace nts
     static void displayType(const std::string &type, Handler *handler)
     {
         std::vector<std::string> chipsets;
-        IIOComponent *iiocomponent = nullptr;
+        component::IO::IIOComponent *iiocomponent = nullptr;
 
         try {
             chipsets = handler->getChipsetNames(type);
@@ -131,7 +131,7 @@ namespace nts
         std::sort(chipsets.begin(), chipsets.end());
 
         for (const auto &i : chipsets) {
-            iiocomponent = dynamic_cast<IIOComponent *>(handler->getChipset(i));
+            iiocomponent = dynamic_cast<component::IO::IIOComponent *>(handler->getChipset(i));
             if (iiocomponent!= nullptr) {
                 std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
             }
@@ -150,11 +150,11 @@ namespace nts
     void Shell::simulate()
     {
         std::vector<std::string> chipsets = this->_handler->getChipsetNames("output");
-        Output *output = nullptr;
+        component::IO::Output *output = nullptr;
 
         this->_handler->incrementTick();
         for (auto &i : chipsets) {
-            output = dynamic_cast<Output *>(this->_handler->getChipset(i));
+            output = dynamic_cast<component::IO::Output *>(this->_handler->getChipset(i));
             if (output!= nullptr) {
                 output->simulate(this->_handler->getTick());
             }

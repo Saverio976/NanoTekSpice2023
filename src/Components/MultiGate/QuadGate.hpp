@@ -12,7 +12,7 @@
 #include "AComponent.hpp"
 #include "SoloGate.hpp"
 
-namespace nts
+namespace nts::component
 {
     template <class T>
     class QuadGate: public AComponent {

@@ -10,7 +10,7 @@
 #include "Inverter.hpp"
 #include <array>
 
-namespace nts
+namespace nts::component
 {
     class Component4069: public AComponent {
         public:

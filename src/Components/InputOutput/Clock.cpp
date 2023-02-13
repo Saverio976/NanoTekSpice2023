@@ -10,7 +10,7 @@
 #include "Pin.hpp"
 #include <iostream>
 
-namespace nts
+namespace nts::component::IO
 {
     void Clock::simulate(std::size_t tick)
     {

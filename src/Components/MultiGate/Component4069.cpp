@@ -9,7 +9,7 @@
 #include "Pin.hpp"
 #include "Component4069.hpp"
 
-namespace nts
+namespace nts::component
 {
     nts::Tristate Component4069::compute(std::size_t pin)
     {
@@ -43,6 +43,6 @@ namespace nts
             throw std::invalid_argument("Invalid pin");
         }
         offset = (pin > 7) ? 2 : 1;
-        return _inverters[(pin - offset) / 2][(pin - offset) % 2 + 1];
+        return _inverters[(pin - offset) / 2][(pin - 1) % 2 + 1];
     }
 }

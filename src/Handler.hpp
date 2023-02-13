@@ -60,6 +60,6 @@ namespace nts
             std::map<std::string, std::vector<std::string>> _specialComponents;
             std::size_t _tick = 0;
             Shell _shell;
-            ComponentFactory _componentFactory;
+            component::ComponentFactory _componentFactory;
     };
 }

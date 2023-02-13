@@ -10,7 +10,7 @@
 #include <ostream>
 #include "IComponent.hpp"
 
-namespace nts
+namespace nts::component
 {
     class AComponent: public nts::IComponent {
         public:

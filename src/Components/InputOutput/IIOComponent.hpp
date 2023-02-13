@@ -11,7 +11,7 @@
 #include "Pin.hpp"
 #include "AComponent.hpp"
 
-namespace nts
+namespace nts::component::IO
 {
     class IIOComponent : public AComponent {
         public:

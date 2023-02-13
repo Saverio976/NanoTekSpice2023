@@ -11,7 +11,7 @@
 #include "PinLink.hpp"
 
 
-namespace nts
+namespace nts::component
 {
     void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
     {

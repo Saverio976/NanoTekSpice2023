@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include "Output.hpp"
-namespace nts
+namespace nts::component::IO
 {
     Output::Output()
     {

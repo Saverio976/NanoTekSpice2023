@@ -9,7 +9,7 @@
 #include "IComponent.hpp"
 #include "Pin.hpp"
 
-namespace nts
+namespace nts::component::IO
     {
     TrueInput::TrueInput()
     {

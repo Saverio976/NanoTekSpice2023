@@ -11,7 +11,6 @@ g++ src/Components/AComponent.o                        \
     src/Components/InputOutput/Input.o                \
     src/Components/InputOutput/Output.o                \
     src/Components/MultiGate/Component4069.o            \
-    src/Components/MultiGate/QuadGate.o                \
     src/FileParser.o                                    \
     src/Handler.o                                        \
     src/Pin/Pin.o                                        \

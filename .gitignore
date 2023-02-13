@@ -58,3 +58,6 @@ nanotekspice
 # End of https://www.toptal.com/developers/gitignore/api/c++,visualstudiocode
 
 compile_flags.txt
+
+bonus/html
+bonus/latex

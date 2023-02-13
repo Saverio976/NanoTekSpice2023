@@ -11,7 +11,10 @@
 #include "Pin.hpp"
 #include "AComponent.hpp"
 
-class IIOComponent : public AComponent {
-    public:
-        virtual nts::Tristate getValue() = 0;
-};
+namespace nts
+{
+    class IIOComponent : public AComponent {
+        public:
+            virtual nts::Tristate getValue() = 0;
+    };
+}

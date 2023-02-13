@@ -10,14 +10,17 @@
 #include "Inverter.hpp"
 #include <array>
 
-class Component4069: public AComponent {
-    public:
-        Component4069() = default;
-        nts::Tristate compute(std::size_t pin) override;
-        void simulate(std::size_t tick) override;
-        nts::IComponent *clone() const;
-        Pin &operator [](std::size_t pin) override;
+namespace nts
+{
+    class Component4069: public AComponent {
+        public:
+            Component4069() = default;
+            nts::Tristate compute(std::size_t pin) override;
+            void simulate(std::size_t tick) override;
+            nts::IComponent *clone() const;
+            Pin &operator [](std::size_t pin) override;
 
-    private:
-        std::array<Inverter, 6> _inverters;
-};
+        private:
+            std::array<Inverter, 6> _inverters;
+    };
+}

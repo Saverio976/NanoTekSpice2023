@@ -19,59 +19,62 @@
 #include "MultiGate/QuadGate.hpp"
 #include "MultiGate/Component4069.hpp"
 
-ComponentFactory::TypeNotInFactory::TypeNotInFactory(const std::string &error):
-    _error(error)
+namespace nts
 {
-}
-
-const char *ComponentFactory::TypeNotInFactory::what() const noexcept
-{
-    return this->_error.data();
-}
-
-ComponentFactory::ComponentFactory()
-{
-    this->registerComponent("and", new AndGate);
-    this->registerComponent("or", new OrGate);
-    this->registerComponent("xor", new XorGate);
-    this->registerComponent("nor", new NorGate);
-    this->registerComponent("nand", new NandGate);
-    this->registerComponent("not", new Inverter);
-    this->registerComponent("input", new Input);
-    this->registerComponent("output", new Output);
-    this->registerComponent("false", new False);
-    this->registerComponent("true", new True);
-    this->registerComponent("clock", new Clock);
-    this->registerComponent("4001", new QuadGate<NorGate>);
-    this->registerComponent("4011", new QuadGate<NandGate>);
-    this->registerComponent("4030", new QuadGate<XorGate>);
-    this->registerComponent("4069", new Component4069);
-    this->registerComponent("4071", new QuadGate<OrGate>);
-    // TODO: add all component that we know of
-}
-
-void ComponentFactory::registerComponent(
-    const std::string &type,
-    nts::IComponent *component)
-{
-    if (this->_components.find(type) == this->_components.end()) {
-        this->_components.insert(std::make_pair(type, std::unique_ptr<nts::IComponent>()));
+    ComponentFactory::TypeNotInFactory::TypeNotInFactory(const std::string &error):
+        _error(error)
+    {
     }
-    this->_components[type].reset(component);
-}
 
-void ComponentFactory::removeComponent(const std::string &type)
-{
-    this->_components.erase(type);
-}
-
-std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string &type)
-{
-    std::unique_ptr<nts::IComponent> newComp;
-
-    if (this->_components.find(type) == this->_components.end()) {
-        throw TypeNotInFactory(type);
+    const char *ComponentFactory::TypeNotInFactory::what() const noexcept
+    {
+        return this->_error.data();
     }
-    newComp.reset(this->_components[type]->clone());
-    return newComp;
+
+    ComponentFactory::ComponentFactory()
+    {
+        this->registerComponent("and", new AndGate);
+        this->registerComponent("or", new OrGate);
+        this->registerComponent("xor", new XorGate);
+        this->registerComponent("nor", new NorGate);
+        this->registerComponent("nand", new NandGate);
+        this->registerComponent("not", new Inverter);
+        this->registerComponent("input", new Input);
+        this->registerComponent("output", new Output);
+        this->registerComponent("false", new FalseInput);
+        this->registerComponent("true", new TrueInput);
+        this->registerComponent("clock", new Clock);
+        this->registerComponent("4001", new QuadGate<NorGate>);
+        this->registerComponent("4011", new QuadGate<NandGate>);
+        this->registerComponent("4030", new QuadGate<XorGate>);
+        this->registerComponent("4069", new Component4069);
+        this->registerComponent("4071", new QuadGate<OrGate>);
+        // TODO: add all component that we know of
+    }
+
+    void ComponentFactory::registerComponent(
+        const std::string &type,
+        nts::IComponent *component)
+    {
+        if (this->_components.find(type) == this->_components.end()) {
+            this->_components.insert(std::make_pair(type, std::unique_ptr<nts::IComponent>()));
+        }
+        this->_components[type].reset(component);
+    }
+
+    void ComponentFactory::removeComponent(const std::string &type)
+    {
+        this->_components.erase(type);
+    }
+
+    std::unique_ptr<nts::IComponent> ComponentFactory::createComponent(const std::string &type)
+    {
+        std::unique_ptr<nts::IComponent> newComp;
+
+        if (this->_components.find(type) == this->_components.end()) {
+            throw TypeNotInFactory(type);
+        }
+        newComp.reset(this->_components[type]->clone());
+        return newComp;
+    }
 }

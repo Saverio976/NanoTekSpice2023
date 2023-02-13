@@ -9,11 +9,14 @@
 #include "IComponent.hpp"
 #include "Input.hpp"
 
-class Clock: public Input {
-    public:
-        void simulate(std::size_t tick) override;
+namespace nts
+{
+    class Clock: public Input {
+        public:
+            void simulate(std::size_t tick) override;
 
-        nts::Tristate getValue() override;
+            nts::Tristate getValue() override;
 
-        nts::IComponent *clone() const final;
-};
+            nts::IComponent *clone() const final;
+    };
+}

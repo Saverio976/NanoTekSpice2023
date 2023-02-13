@@ -7,17 +7,20 @@
 
 #pragma once
 
-class Pin;
+namespace nts
+{
+    class Pin;
 
-class PinLink {
-    public:
-        PinLink(Pin *in, Pin *out);
-        ~PinLink();
+    class PinLink {
+        public:
+            PinLink(Pin *in, Pin *out);
+            ~PinLink();
 
-        Pin *getOutput();
-        Pin *getInput();
-    protected:
-    private:
-        Pin *_input;
-        Pin *_output;
-};
+            Pin *getOutput();
+            Pin *getInput();
+        protected:
+        private:
+            Pin *_input;
+            Pin *_output;
+    };
+}

@@ -8,9 +8,10 @@
 #pragma once
 #include <cstddef>
 
-class Pin;
 namespace nts
 {
+    class Pin;
+
     enum Tristate
     {
         Undefined = (-true),
@@ -28,7 +29,6 @@ namespace nts
         virtual IComponent *clone() const = 0;
 
         virtual Pin &operator [](std::size_t index) = 0;
-        virtual const Pin &operator [](std::size_t index) const = 0;
     };
 }
 

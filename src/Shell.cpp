@@ -116,15 +116,15 @@ void Shell::setInput(const std::string &name, std::size_t value)
 
 static void displayType(const std::string &type, Handler *handler)
 {
-    std::vector<std::string> abc;
+    std::vector<std::string> chipsets;
     IIOComponent *iiocomponent = nullptr;
 
     try {
-        abc = handler->getChipsetNames(type);
+        chipsets = handler->getChipsetNames(type);
     } catch (const std::exception &e) {
-        abc = {};
+        chipsets = {};
     }
-    for (const auto &i : abc) {
+    for (const auto &i : chipsets) {
         iiocomponent = dynamic_cast<IIOComponent *>(handler->getChipset(i));
         if (iiocomponent!= nullptr) {
             std::cout << "  " << i << ": " << iiocomponent->getValue() << std::endl;
@@ -143,11 +143,11 @@ void Shell::display() const
 
 void Shell::simulate()
 {
-    std::vector<std::string> abc = this->_handler->getChipsetNames("output");
+    std::vector<std::string> chipsets = this->_handler->getChipsetNames("output");
     Output *output = nullptr;
 
     this->_handler->incrementTick();
-    for (auto &i : abc) {
+    for (auto &i : chipsets) {
         output = dynamic_cast<Output *>(this->_handler->getChipset(i));
         if (output!= nullptr) {
             output->simulate(this->_handler->getTick());

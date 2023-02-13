@@ -97,4 +97,5 @@ void FileParser::loadFile(const std::string &fileName)
     if (!f.eof()) {
         throw FileParsingError("Unable to read file " + fileName);
     }
+    this->_handler->checkGoodParsing();
 }

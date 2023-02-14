@@ -10,6 +10,7 @@
 #include <ios>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include <string>
 #include "string.h"
 #include "Handler.hpp"
@@ -54,7 +55,11 @@ namespace nts
 
         s.str(all.substr(all.find(':') + 1));
         s.exceptions(std::ios::failbit);
-        s >> pin;
+        try {
+            s >> pin;
+        } catch (const std::ios_base::failure &e) {
+            throw FileParsingError("Invalid pin number for link [" + all + "].");
+        }
         return pin;
     }
 
@@ -74,11 +79,17 @@ namespace nts
             type = LINKS;
             return;
         }
+        if (type == UNKNOWN) {
+            throw FileParsingError("Instruction outside of label");
+        }
         linestream >> leftPart >> rightPart;
         if (linestream.rdbuf()->in_avail() != 0 || rightPart == "") {
-            throw FileParsingError("Invalid line, too many arguments (need exactly 2).");
+            throw FileParsingError("Too many arguments (need exactly 2).");
         }
         if (type == CHIPSETS) {
+            if (std::count(rightPart.begin(), rightPart.end(), ':') != 0) {
+                throw FileParsingError("Invalid chipset name, must not contain ':'");
+            }
             this->_handler->addChipset(leftPart, rightPart);
         } else if (type == LINKS) {
             this->_handler->addLink(
@@ -98,11 +109,12 @@ namespace nts
             throw FileParsingError("Unable to open file " + fileName);
         }
         while (std::getline(f, line)) {
+            _lineCount += 1;
             trim_line(line);
             try {
                 handleLine(line);
             } catch (const BaseError &e) {
-                throw FileParsingError(_fileName + ":" + std::to_string(line_count) + ": " + e.what() + "\n" + line);
+                throw FileParsingError(_fileName + ":" + std::to_string(_lineCount) + ": " + e.what() + "\n" + std::to_string(_lineCount) + ">" + line);
             }
         }
         if (!f.eof()) {

@@ -34,7 +34,7 @@ namespace nts
 
             Handler *_handler;
 
-            size_t line_count = 0;
+            size_t _lineCount = 0;
             const std::string &_fileName;
             ParsingType type = UNKNOWN;
             void handleLine(std::string &line);

@@ -32,7 +32,7 @@ input in_13
 4081 gate
 
 .links:
-in_01:1 gate:1
+  in_01:1	 gate:1#This line should raise an error
 in_02:1 gate:2
 out_03:1 gate:3
 out_04:1 gate:4

@@ -73,5 +73,5 @@ re: fclean $(TARGET)
 
 tests_run: $(TARGET)
 	bash tests/functional/test_bad.sh
-	# bash tests/functional/nts_single_test/nts_single.sh
-	# bash tests/functional/base_components.sh
+	-bash tests/functional/nts_single_test/nts_single.sh
+	bash tests/functional/base_components.sh

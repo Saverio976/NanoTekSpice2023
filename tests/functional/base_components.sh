@@ -16,6 +16,7 @@ g++ src/Components/AComponent.o                        \
     src/Pin/Pin.o                                        \
     src/Pin/PinLink.o                                        \
     src/Shell.o \
+    src/BaseError.o \
     tests/functional/basic_components.cpp   \
     -Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate \
     -std=c++23 -o base_comp.out

@@ -26,7 +26,7 @@ namespace nts::component::IO
     nts::Tristate TrueInput::compute(size_t pin)
     {
         if (pin != 1) {
-            throw std::out_of_range("Chipset doesn't have enough pins");
+            throw OutOfRange("True: chipset doesn't have enough pins");
         }
         return _pins[0].getValue();
     }
@@ -44,7 +44,7 @@ namespace nts::component::IO
     nts::Tristate FalseInput::compute(size_t pin)
     {
         if (pin != 1) {
-            throw std::out_of_range("Chipset doesn't have enough pins");
+            throw OutOfRange("False: chipset doesn't have enough pins");
         }
         return _pins[0].getValue();
     }

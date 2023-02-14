@@ -18,6 +18,7 @@
 #include <vector>
 #include "IComponent.hpp"
 #include "PinLink.hpp"
+#include "BaseError.hpp"
 
 namespace nts
 {
@@ -26,8 +27,13 @@ namespace nts
         public:
             enum PinType {
                 INPUT,
-                OUTPUT,
-                BRIDGE
+                OUTPUT
+            };
+
+
+            class BadPin: public BaseError
+            {
+                using BaseError::BaseError;
             };
 
             Pin(nts::IComponent &, PinType, size_t);

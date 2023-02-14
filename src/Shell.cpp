@@ -61,7 +61,7 @@ namespace nts
         }
         value = std::stoi(valueStr);
         if (value > 1 || value < 0) {
-            throw BadSetValueInput("Value must be 0 or 1 or U");
+            throw BadSetValueInput("Input value must be 0 or 1 or U but it was [" + valueStr + "]");
         }
         return value;
     }
@@ -85,8 +85,7 @@ namespace nts
             } else if (line == "help") {
                 this->help();
             } else {
-                throw UnkownCommand("Unknown command [" + line + "].\n" +
-                "Available commands are: display, simulate, loop, exit. Or you can set value of input using in_name=...");
+                throw UnkownCommand("Unknown command [" + line + "]. Try help to have a list of commands");
             }
             std::cout << "> ";
         }
@@ -105,7 +104,7 @@ namespace nts
 
         if (iinput == nullptr) {
             linestream << value << " not an Input";
-            throw BadSetValueInput(linestream.str());
+            throw BadSetValueInput("Can't set value of " + name + ", is not an input.");
         }
         iinput->setValue(choices[value]);
     }

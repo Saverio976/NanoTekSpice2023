@@ -21,7 +21,7 @@ namespace nts::component
 
         if ((*this)[pin].getPinType() == other[otherPin].getPinType())
         {
-            throw std::invalid_argument("Trying to link two pins of same type");
+            throw PinLink::InvalidLink("Trying to link two pins of same type");
         }
         if ((*this)[pin].getPinType() == Pin::INPUT) {
             in = &(*this)[pin];
@@ -38,10 +38,10 @@ namespace nts::component
     nts::Pin& AComponent::operator [](std::size_t index)
     {
         if (index == 0) {
-            throw std::invalid_argument("Invalid pin");
+            throw Pin::BadPin("Default component: bad pin, can't access pin n°" + std::to_string(index) + ".");
         }
         if (index - 1 >= _pins.size()) {
-            throw std::out_of_range("Chipset doesn't have enough pins");
+            throw OutOfRange("Default component: chipset doesn't have enough pins to access pin n°" + std::to_string(index) + ".");
         }
         return _pins[index - 1];
     }

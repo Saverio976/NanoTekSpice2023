@@ -76,7 +76,7 @@ namespace nts
         }
         linestream >> leftPart >> rightPart;
         if (linestream.rdbuf()->in_avail() != 0 || rightPart == "") {
-            throw FileParsingError(_fileName + ":" + std::to_string(line_count) + ": Invalid line, too many arguments (need exactly 2).\n" + line);
+            throw FileParsingError("Invalid line, too many arguments (need exactly 2).");
         }
         if (type == CHIPSETS) {
             this->_handler->addChipset(leftPart, rightPart);
@@ -99,7 +99,11 @@ namespace nts
         }
         while (std::getline(f, line)) {
             trim_line(line);
-            handleLine(line);
+            try {
+                handleLine(line);
+            } catch (const BaseError &e) {
+                throw FileParsingError(_fileName + ":" + std::to_string(line_count) + ": " + e.what() + "\n" + line);
+            }
         }
         if (!f.eof()) {
             throw FileParsingError("Unable to read file " + fileName);

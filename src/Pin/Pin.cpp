@@ -57,7 +57,7 @@ namespace nts
     void Pin::addLink(PinLink link)
     {
         if (getPinType() == INPUT && !_links.empty()) {
-            throw std::invalid_argument("Multi link to single input");
+            throw PinLink::InvalidLink("Input can't take multiple links");
         }
         _links.push_back(link);
     }

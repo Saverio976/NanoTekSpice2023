@@ -35,7 +35,7 @@ namespace nts::component {
             _pins[0].simulate(_lastTick);
             return triNot(_pins[0].getValue());
         }
-        throw std::out_of_range("Inverter: Chipset doesn't have enough pins");
+        throw OutOfRange("Inverter: Chipset doesn't have enough pins");
     }
 
     IComponent *Inverter::clone() const

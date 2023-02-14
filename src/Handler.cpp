@@ -27,26 +27,6 @@ namespace nts
         this->_shell.mainLoop();
     }
 
-    Handler::ChipsetAlreadyCreatedException::ChipsetAlreadyCreatedException(const std::string &error):
-        _error(error)
-    {
-    }
-
-    const char *Handler::ChipsetAlreadyCreatedException::what() const noexcept
-    {
-        return this->_error.data();
-    }
-
-    Handler::ChipsetNameNotFoundException::ChipsetNameNotFoundException(const std::string &error):
-        _error(error)
-    {
-    }
-
-    const char *Handler::ChipsetNameNotFoundException::what() const noexcept
-    {
-        return this->_error.data();
-    }
-
     void Handler::loadFile(const std::string &fileName)
     {
         FileParser file(fileName, this);

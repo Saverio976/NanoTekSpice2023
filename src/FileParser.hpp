@@ -8,8 +8,7 @@
 #pragma once
 
 #include <cstddef>
-#include <exception>
-#include <string>
+#include "BaseError.hpp"
 
 namespace nts
 {
@@ -17,15 +16,11 @@ namespace nts
 
     class FileParser {
         public:
-            class FileParsingError : public std::exception {
-                public:
-                    FileParsingError(const std::string &error);
-                    const char *what() const noexcept override;
-                private:
-                    const std::string _error;
+            class FileParsingError : public BaseError
+            {
+                using BaseError::BaseError;
             };
 
-            FileParser(Handler *handler);
             FileParser(const std::string &fileName, Handler *handler);
 
             void loadFile(const std::string &fileName);
@@ -39,6 +34,10 @@ namespace nts
 
             Handler *_handler;
 
+            size_t line_count = 0;
+            const std::string &_fileName;
+            ParsingType type = UNKNOWN;
+            void handleLine(std::string &line);
             std::string parseLinkName(const std::string &all) const;
             std::size_t parseLinkPin(const std::string &all) const;
     };

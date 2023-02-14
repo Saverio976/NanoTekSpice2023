@@ -37,10 +37,10 @@ namespace nts::component
         size_t offset = 0;
 
         if (pin > 14) {
-            throw std::out_of_range("4069: Chipset doesn't have enough pins");
+            throw OutOfRange("4069: Chipset doesn't have enough pins");
         }
         if (pin == 0 || pin == 7 || pin == 14) {
-            throw std::invalid_argument("Invalid pin");
+            throw Pin::BadPin("4069, pin n°" + std::to_string(pin) + " is reserved for electrical purpose");
         }
         offset = (pin > 7) ? 2 : 1;
         return _inverters[(pin - offset) / 2][(pin - 1) % 2 + 1];

@@ -10,18 +10,15 @@
 #include <memory>
 #include <string>
 #include "IComponent.hpp"
+#include "BaseError.hpp"
 
 namespace nts::component
 {
     class ComponentFactory {
         public:
-            class TypeNotInFactory : public std::exception {
-                public:
-                    TypeNotInFactory(const std::string &type);
-                    const char *what() const noexcept override;
-
-                protected:
-                    std::string _error;
+            class TypeNotInFactory : public BaseError
+            {
+                using BaseError::BaseError;
             };
             ComponentFactory();
 

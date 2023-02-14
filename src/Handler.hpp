@@ -17,26 +17,22 @@
 #include "IComponent.hpp"
 #include "PinLink.hpp"
 #include "Shell.hpp"
+#include "BaseError.hpp"
 
 namespace nts
 {
     class Handler
     {
         public:
-            class ChipsetAlreadyCreatedException : public std::exception {
-                public:
-                    ChipsetAlreadyCreatedException(const std::string &error);
-                    const char *what() const noexcept override;
-                private:
-                    const std::string _error;
+            class ChipsetAlreadyCreatedException : public BaseError
+            {
+                using BaseError::BaseError;
             };
-            class ChipsetNameNotFoundException : public std::exception {
-                public:
-                    ChipsetNameNotFoundException(const std::string &error);
-                    const char *what() const noexcept override;
-                private:
-                    const std::string _error;
+            class ChipsetNameNotFoundException : public BaseError
+            {
+                using BaseError::BaseError;
             };
+
             Handler();
 
             void loadFile(const std::string &fileName);

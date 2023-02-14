@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include "BaseError.hpp"
 
 namespace nts
 {
@@ -13,6 +14,11 @@ namespace nts
 
     class PinLink {
         public:
+            class InvalidLink: public BaseError
+            {
+                using BaseError::BaseError;
+            };
+
             PinLink(Pin *in, Pin *out);
             ~PinLink();
 

@@ -1,0 +1,6 @@
+.chipsets:
+input i1
+output o1
+
+.links:
+i1:1 #Fancy comment!

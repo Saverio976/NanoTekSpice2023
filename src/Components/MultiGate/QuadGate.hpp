@@ -39,7 +39,7 @@ namespace nts::component
             Pin &operator [](std::size_t pin) override
             {
                 if (pin == 0 || pin == 7 || pin == 14) {
-                    throw std::invalid_argument("Invalid pin");
+                    throw Pin::BadPin("QuadGate, pin n°" + std::to_string(pin) + " is reserved for electrical purpose");
                 }
                 switch (pin) {
                     case 1:
@@ -65,7 +65,7 @@ namespace nts::component
                     case 13:
                         return _gates[3][2];
                     default:
-                        throw std::out_of_range("Chipset doesn't have enough pins");
+                        throw OutOfRange("QuadGate, Chipset doesn't have enough pins for pin n°" + std::to_string(pin) + ".");
                 }
             }
         private:

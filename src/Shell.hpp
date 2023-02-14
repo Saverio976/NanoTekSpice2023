@@ -8,6 +8,7 @@
 #pragma once
 
 #include <string>
+#include "BaseError.hpp"
 
 namespace nts
 {
@@ -15,14 +16,16 @@ namespace nts
 
     class Shell {
         public:
-            class BadSetValueInput : public std::exception {
-                public:
-                    BadSetValueInput(const std::string &error);
-                    const char *what() const noexcept override;
-
-                protected:
-                    std::string _error;
+            class BadSetValueInput : public BaseError
+            {
+                using BaseError::BaseError;
             };
+
+            class UnkownCommand: public BaseError
+            {
+                using BaseError::BaseError;
+            };
+
             Shell(Handler *handler);
             ~Shell() = default;
 
@@ -41,6 +44,7 @@ namespace nts
             void simulate();
             void loop();
             void exit();
+            void help() const;
             static bool _endLoop;
     };
 }

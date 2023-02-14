@@ -27,26 +27,6 @@ namespace nts
         this->_shell.mainLoop();
     }
 
-    Handler::ChipsetAlreadyCreatedException::ChipsetAlreadyCreatedException(const std::string &error):
-        _error(error)
-    {
-    }
-
-    const char *Handler::ChipsetAlreadyCreatedException::what() const noexcept
-    {
-        return this->_error.data();
-    }
-
-    Handler::ChipsetNameNotFoundException::ChipsetNameNotFoundException(const std::string &error):
-        _error(error)
-    {
-    }
-
-    const char *Handler::ChipsetNameNotFoundException::what() const noexcept
-    {
-        return this->_error.data();
-    }
-
     void Handler::loadFile(const std::string &fileName)
     {
         FileParser file(fileName, this);
@@ -63,7 +43,7 @@ namespace nts
         };
 
         if (this->_components.find(name) != this->_components.end()) {
-            throw ChipsetAlreadyCreatedException("Chipset: " + name);
+            throw ChipsetAlreadyCreatedException("Chipset: " + name + " already exists");
         }
         this->_components[name] = this->_componentFactory.createComponent(type);
         if (this->_specialComponents.find(type) == this->_specialComponents.end()) {
@@ -85,10 +65,11 @@ namespace nts
         std::size_t pin2
     )
     {
-        if (this->_components.find(name1) == this->_components.end() ||
-            this->_components.find(name2) == this->_components.end()
-        ) {
-            throw ChipsetNameNotFoundException("Chipset: " + name1 + " or " + name2);
+        if (this->_components.find(name1) == this->_components.end()) {
+            throw ChipsetNameNotFoundException("Trying to link unkown component '" + name1 + "'");
+        }
+        if (this->_components.find(name2) == this->_components.end()) {
+            throw ChipsetNameNotFoundException("Trying to link unkown component '" + name2 + "'");
         }
         this->_components[name1]->setLink(pin1, *this->_components[name2].get(), pin2);
     }
@@ -129,7 +110,7 @@ namespace nts
     void Handler::checkGoodParsing() const
     {
         if (this->_components.empty()) {
-            throw ChipsetNameNotFoundException("No chipset found");
+            throw ChipsetNameNotFoundException("Circuit must contain at least 1 chipset");
         }
     }
 }

@@ -28,10 +28,11 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Handler.cpp										\
 					src/main.cpp										\
 					src/Pin/Pin.cpp										\
-					src/Pin/PinLink.cpp										\
-					src/Shell.cpp
+					src/Pin/PinLink.cpp									\
+					src/Shell.cpp										\
+					src/BaseError.cpp
 
-INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate
+INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate -Isrc
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++20
 
@@ -70,5 +71,7 @@ fclean: clean
 
 re: fclean $(TARGET)
 
-tests_run: $(OBJ)
-	bash tests/functional/base_components.bash
+tests_run: $(TARGET)
+	bash tests/functional/test_bad.sh
+	-bash tests/functional/nts_single_test/nts_single.sh
+	bash tests/functional/base_components.sh

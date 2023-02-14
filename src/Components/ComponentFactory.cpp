@@ -21,16 +21,6 @@
 
 namespace nts::component
 {
-    ComponentFactory::TypeNotInFactory::TypeNotInFactory(const std::string &error):
-        _error(error)
-    {
-    }
-
-    const char *ComponentFactory::TypeNotInFactory::what() const noexcept
-    {
-        return this->_error.data();
-    }
-
     ComponentFactory::ComponentFactory()
     {
         this->registerComponent("and", new AndGate);
@@ -49,6 +39,7 @@ namespace nts::component
         this->registerComponent("4030", new QuadGate<XorGate>);
         this->registerComponent("4069", new Component4069);
         this->registerComponent("4071", new QuadGate<OrGate>);
+        this->registerComponent("4081", new QuadGate<AndGate>);
         // TODO: add all component that we know of
     }
 
@@ -72,7 +63,7 @@ namespace nts::component
         std::unique_ptr<nts::IComponent> newComp;
 
         if (this->_components.find(type) == this->_components.end()) {
-            throw TypeNotInFactory(type);
+            throw TypeNotInFactory("Couldn't load component " + type);
         }
         newComp.reset(this->_components[type]->clone());
         return newComp;

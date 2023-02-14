@@ -9,11 +9,17 @@
 #include <vector>
 #include <ostream>
 #include "IComponent.hpp"
+#include "BaseError.hpp"
 
 namespace nts::component
 {
     class AComponent: public nts::IComponent {
         public:
+            class OutOfRange: public BaseError
+            {
+                using BaseError::BaseError;
+            };
+
             void simulate(std::size_t tick) override;
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
 

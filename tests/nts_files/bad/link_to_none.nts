@@ -1,0 +1,6 @@
+.chipsets:
+input i1
+output o1
+
+.links:
+o1:1 fake:1

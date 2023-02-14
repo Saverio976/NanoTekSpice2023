@@ -47,7 +47,19 @@ static void display_help(const char *exec)
     std::cout << "\t\t4512: 8 channel data selector." << std::endl;
     std::cout << "\t\t4514: 4 bits decoder." << std::endl;
     std::cout << "\t\t4801: Random access memory." << std::endl;
-    std::cout << "\t\t2716: Read only memory (memory initialized from ./rom.bin)" << std::endl;
+    std::cout << "\t\t2716: Read only memory (memory initialized from ./rom.bin)" << std::endl << std::endl;
+
+    std::cout << "And here's the truth table:" << std::endl;
+    std::cout << "\t| A | B |AND|OR |XOR|" << std::endl;
+    std::cout << "\t| 0 | 0 | 0 | 0 | 0 |" << std::endl;
+    std::cout << "\t| 0 | 1 | 0 | 1 | 1 |" << std::endl;
+    std::cout << "\t| 0 | U | 0 | U | U |" << std::endl;
+    std::cout << "\t| 1 | 0 | 0 | 1 | 1 |" << std::endl;
+    std::cout << "\t| 1 | 1 | 1 | 1 | 0 |" << std::endl;
+    std::cout << "\t| 1 | U | U | 1 | U |" << std::endl;
+    std::cout << "\t| U | 0 | 0 | U | U |" << std::endl;
+    std::cout << "\t| U | 1 | U | 1 | U |" << std::endl;
+    std::cout << "\t| U | U | U | U | U |" << std::endl;
 }
 
 int main(int argc, const char *const argv[])

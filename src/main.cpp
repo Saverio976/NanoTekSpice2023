@@ -67,8 +67,8 @@ int main(int argc, const char *const argv[])
     nts::Handler handler;
 
     if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " [circuit_file.nts]" << std::endl;
-        std::cout << "Try '" << argv[0] << " --help' for more information." << std::endl;
+        std::cerr << "Usage: " << argv[0] << " [circuit_file.nts]" << std::endl;
+        std::cerr << "Try '" << argv[0] << " --help' for more information." << std::endl;
         return 84;
     }
     if (strcmp(argv[1], "--help") == 0) {

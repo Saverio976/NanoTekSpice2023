@@ -8,7 +8,6 @@
 #include "SoloGate.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
-#include <iostream>
 #include "PinLink.hpp"
 
 namespace nts::component {

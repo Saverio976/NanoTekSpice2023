@@ -8,7 +8,6 @@
 #pragma once
 #include <vector>
 #include <ostream>
-#include <iostream>
 #include "IComponent.hpp"
 #include "BaseError.hpp"
 

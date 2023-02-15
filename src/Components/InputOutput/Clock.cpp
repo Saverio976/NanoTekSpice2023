@@ -8,7 +8,6 @@
 #include "Clock.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
-#include <iostream>
 
 namespace nts::component::IO
 {

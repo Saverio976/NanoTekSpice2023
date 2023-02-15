@@ -6,7 +6,6 @@
 */
 
 #include "AComponent.hpp"
-#include <iostream>
 #include "Pin.hpp"
 #include "PinLink.hpp"
 

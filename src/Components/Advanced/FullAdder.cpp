@@ -7,7 +7,6 @@
 
 #include "FullAdder.hpp"
 #include "Pin.hpp"
-#include <iostream>
 
 static nts::Pin *getOutput(nts::component::SoloGate &g)
 {

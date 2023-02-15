@@ -6,7 +6,6 @@
 */
 
 
-#include <iostream>
 #include "Output.hpp"
 namespace nts::component::IO
 {

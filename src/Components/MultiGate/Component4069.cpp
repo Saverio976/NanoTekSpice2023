@@ -5,7 +5,6 @@
 ** Component4069
 */
 
-#include <iostream>
 #include "Pin.hpp"
 #include "Component4069.hpp"
 

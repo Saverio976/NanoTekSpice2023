@@ -5,7 +5,7 @@
 #include "Constants.hpp"
 #include <iostream>
 
-nts::Tristate conv(int i)
+static nts::Tristate conv(int i)
 {
     switch (i) {
         case 0:

@@ -15,9 +15,9 @@ namespace nts::component
     class SoloGate: public AComponent {
         public:
             SoloGate();
+            void QuickLink(Pin *in1, Pin *in2);
             nts::Tristate compute(std::size_t pin) override;
 
-        protected:
         private:
             virtual nts::Tristate operation(nts::Tristate left, nts::Tristate right) = 0;
     };

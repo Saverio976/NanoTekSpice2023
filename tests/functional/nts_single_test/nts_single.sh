@@ -7,7 +7,7 @@ do
     then
         error_happend=84
         echo "Failed to load $FILE"
-        echo "error: [$error_msg]"
+        echo "$error_msg"
         echo ""
     fi
 done

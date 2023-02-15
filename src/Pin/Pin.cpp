@@ -8,7 +8,6 @@
 #include <stdexcept>
 #include "Pin.hpp"
 #include "PinLink.hpp"
-#include <iostream>
 
 namespace nts
 {

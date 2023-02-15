@@ -8,7 +8,6 @@
 #include "SoloGate.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
-#include <iostream>
 #include "PinLink.hpp"
 
 namespace nts::component {
@@ -17,6 +16,12 @@ namespace nts::component {
         _pins.push_back(Pin(*this, Pin::INPUT, 1));
         _pins.push_back(Pin(*this, Pin::INPUT, 2));
         _pins.push_back(Pin(*this, Pin::OUTPUT, 3));
+    }
+
+    void SoloGate::QuickLink(Pin *i1, Pin *i2)
+    {
+        setLink(&_pins[0], i1);
+        setLink(&_pins[1], i2);
     }
 
     nts::Tristate SoloGate::compute(std::size_t pin)

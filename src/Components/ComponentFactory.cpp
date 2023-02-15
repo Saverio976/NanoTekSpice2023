@@ -18,6 +18,7 @@
 #include "InputOutput/Clock.hpp"
 #include "MultiGate/QuadGate.hpp"
 #include "MultiGate/Component4069.hpp"
+#include "Advanced/Component4008.hpp"
 
 namespace nts::component
 {
@@ -40,6 +41,7 @@ namespace nts::component
         this->registerComponent("4069", new Component4069);
         this->registerComponent("4071", new QuadGate<OrGate>);
         this->registerComponent("4081", new QuadGate<AndGate>);
+        this->registerComponent("4008", new Component4008);
         // TODO: add all component that we know of
     }
 

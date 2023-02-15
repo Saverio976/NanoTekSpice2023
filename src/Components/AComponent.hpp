@@ -8,6 +8,7 @@
 #pragma once
 #include <vector>
 #include <ostream>
+#include <iostream>
 #include "IComponent.hpp"
 #include "BaseError.hpp"
 
@@ -22,6 +23,8 @@ namespace nts::component
 
             void simulate(std::size_t tick) override;
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
+            void setLink(nts::Pin *p1, nts::Pin *p2) override;
+
 
             nts::Pin &operator [](std::size_t index) override;
         protected:

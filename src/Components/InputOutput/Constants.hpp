@@ -12,22 +12,18 @@
 #include "AComponent.hpp"
 namespace nts::component::IO
 {
-    class TrueInput: public IIOComponent {
+    class TrueInput: public AComponent {
         public:
             TrueInput();
             nts::Tristate compute(size_t pin) override;
 
-            nts::Tristate getValue() override;
-
             nts::IComponent *clone() const final;
     };
 
-    class FalseInput: public IIOComponent {
+    class FalseInput: public AComponent {
         public:
             FalseInput();
             nts::Tristate compute(size_t pin) override;
-
-            nts::Tristate getValue() override;
 
             nts::IComponent *clone() const final;
     };

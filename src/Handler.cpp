@@ -37,8 +37,6 @@ namespace nts
         std::map<std::string, std::string> choices = {
             {"input", "inputDisplay"},
             {"clock", "inputDisplay"},
-            {"true", "inputDisplay"},
-            {"false", "inputDisplay"},
             {"output", "outputDisplay"},
         };
 

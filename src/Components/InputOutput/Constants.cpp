@@ -31,11 +31,6 @@ namespace nts::component::IO
         return _pins[0].getValue();
     }
 
-    nts::Tristate TrueInput::getValue()
-    {
-        return this->_pins[0].getValue();
-    }
-
     nts::IComponent *TrueInput::clone() const
     {
         return new TrueInput();
@@ -52,10 +47,5 @@ namespace nts::component::IO
     nts::IComponent *FalseInput::clone() const
     {
         return new FalseInput();
-    }
-
-    nts::Tristate FalseInput::getValue()
-    {
-        return this->_pins[0].getValue();
     }
 }

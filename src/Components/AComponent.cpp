@@ -13,27 +13,26 @@
 
 namespace nts::component
 {
-    void AComponent::setLink(nts::Pin *p1, nts::Pin *p2)
+    void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
     {
         PinLink link(nullptr, nullptr);
+        nts::Pin *in;
+        nts::Pin *out;
 
-        if (p1->getPinType() == p2->getPinType())
+        if ((*this)[pin].getPinType() == other[otherPin].getPinType())
         {
             throw PinLink::InvalidLink("Trying to link two pins of same type");
         }
-
-        if (p1->getPinType() == Pin::INPUT) {
-            link = PinLink(p1, p2);
+        if ((*this)[pin].getPinType() == Pin::INPUT) {
+            in = &(*this)[pin];
+            out = &other[otherPin];
         } else {
-            link = PinLink(p2, p1);
+            in = &other[otherPin];
+            out = &(*this)[pin];
         }
-        p1->addLink(link);
-        p2->addLink(link);
-    }
-
-    void AComponent::setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin)
-    {
-        setLink(&(*this)[pin], &other[otherPin]);
+        link = PinLink(in, out);
+        in->addLink(link);
+        out->addLink(link);
     }
 
     nts::Pin& AComponent::operator [](std::size_t index)

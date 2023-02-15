@@ -18,15 +18,12 @@ TARGET 			= 	nanotekspice
 SRC 			=	src/Components/AComponent.cpp						\
 					src/Components/Basic/Inverter.cpp					\
 					src/Components/Basic/SoloGate.cpp					\
-					src/Components/Basic/Forker.cpp						\
 					src/Components/ComponentFactory.cpp					\
 					src/Components/InputOutput/Clock.cpp				\
 					src/Components/InputOutput/Constants.cpp			\
 					src/Components/InputOutput/Input.cpp				\
 					src/Components/InputOutput/Output.cpp				\
 					src/Components/MultiGate/Component4069.cpp			\
-					src/Components/Advanced/FullAdder.cpp				\
-					src/Components/Advanced/Component4008.cpp			\
 					src/FileParser.cpp									\
 					src/Handler.cpp										\
 					src/main.cpp										\
@@ -35,9 +32,7 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Shell.cpp										\
 					src/BaseError.cpp
 
-INCLUDES 		=	-Iinclude -Isrc -Isrc/Pin -Isrc/Components 				\
-					-Isrc/Components/Basic -Isrc/Components/InputOutput 	\
-					-Isrc/Components/MultiGate -Isrc/Components/Advanced	\
+INCLUDES 		=	-Iinclude -Isrc/Pin -Isrc/Components -Isrc/Components/Basic -Isrc/Components/InputOutput -Isrc/Components/MultiGate -Isrc
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++20
 

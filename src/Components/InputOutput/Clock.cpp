@@ -17,10 +17,10 @@ namespace nts::component::IO
         if (this->_lastTick == tick) {
             return;
         }
+        AComponent::simulate(tick);
         if (_value != nts::Undefined) {
             _value = (nts::Tristate)!_value;
         }
-        AComponent::simulate(tick);
     }
 
     nts::IComponent *Clock::clone() const

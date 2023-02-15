@@ -21,8 +21,7 @@ namespace nts::component
             nts::IComponent *clone() const final;
 
             Pin &operator [](size_t pin) override;
-            std::array<FullAdder, 4> _adders;
         private:
-
+            std::array<FullAdder, 4> _adders;
     };
 }

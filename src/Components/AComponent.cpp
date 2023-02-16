@@ -12,6 +12,12 @@
 
 namespace nts::component
 {
+    nts::Tristate AComponent::compute(size_t pin)
+    {
+        (*this)[pin].simulate(_lastTick);
+        return (*this)[pin].getValue();
+    }
+
     void AComponent::setLink(nts::Pin *p1, nts::Pin *p2)
     {
         PinLink link(nullptr, nullptr);

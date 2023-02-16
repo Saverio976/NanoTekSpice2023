@@ -19,6 +19,9 @@
 #include "MultiGate/QuadGate.hpp"
 #include "MultiGate/Component4069.hpp"
 #include "Advanced/Component4008.hpp"
+#include "Advanced/Decoders/2to4.hpp"
+#include "Advanced/Decoders/3to8.hpp"
+#include "Advanced/Decoders/4to16.hpp"
 
 namespace nts::component
 {
@@ -42,6 +45,9 @@ namespace nts::component
         this->registerComponent("4071", new QuadGate<OrGate>);
         this->registerComponent("4081", new QuadGate<AndGate>);
         this->registerComponent("4008", new Component4008);
+        this->registerComponent("2to4", new Decoder2to4);
+        this->registerComponent("3to8", new Decoder3to8);
+        this->registerComponent("4to16", new Decoder4to16);
         // TODO: add all component that we know of
     }
 

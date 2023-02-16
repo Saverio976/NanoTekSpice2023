@@ -27,6 +27,9 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Components/MultiGate/Component4069.cpp			\
 					src/Components/Advanced/FullAdder.cpp				\
 					src/Components/Advanced/Component4008.cpp			\
+					src/Components/Advanced/Decoders/2to4.cpp			\
+					src/Components/Advanced/Decoders/3to8.cpp			\
+					src/Components/Advanced/Decoders/4to16.cpp			\
 					src/FileParser.cpp									\
 					src/Handler.cpp										\
 					src/main.cpp										\

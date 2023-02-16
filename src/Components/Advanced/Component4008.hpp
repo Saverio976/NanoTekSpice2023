@@ -16,7 +16,6 @@ namespace nts::component
         public:
             Component4008();
 
-            nts::Tristate compute(std::size_t pin) override;
             void simulate(std::size_t lastTick) override;
             nts::IComponent *clone() const final;
 

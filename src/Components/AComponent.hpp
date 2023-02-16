@@ -20,6 +20,7 @@ namespace nts::component
                 using BaseError::BaseError;
             };
 
+            nts::Tristate compute(size_t pin) override;
             void simulate(std::size_t tick) override;
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
             void setLink(nts::Pin *p1, nts::Pin *p2) override;

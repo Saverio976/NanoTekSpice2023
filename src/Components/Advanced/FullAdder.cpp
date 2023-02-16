@@ -32,12 +32,6 @@ namespace nts::component
         _carryOr.QuickLink(getOutput(_inOr), getOutput(_acAnd));
     }
 
-    nts::Tristate FullAdder::compute(std::size_t pin)
-    {
-        (*this)[pin].simulate(_lastTick);
-        return (*this)[pin].getValue();
-    }
-
     void FullAdder::simulate(std::size_t lastTick)
     {
         if (_lastTick == lastTick) {

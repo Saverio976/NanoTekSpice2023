@@ -17,12 +17,6 @@ namespace nts::component
         }
     }
 
-    nts::Tristate Component4008::compute(std::size_t pin)
-    {
-        (*this)[pin].simulate(_lastTick);
-        return (*this)[pin].getValue();
-    }
-
     void Component4008::simulate(std::size_t lastTick)
     {
         if (lastTick == _lastTick) {

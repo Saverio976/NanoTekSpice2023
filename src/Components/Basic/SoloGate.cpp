@@ -84,7 +84,7 @@ namespace nts::component {
 
     nts::IComponent *NorGate::clone() const
     {
-        return new AndGate();
+        return new NorGate();
     }
 
     nts::Tristate NorGate::operation(nts::Tristate left, nts::Tristate right)
@@ -100,7 +100,7 @@ namespace nts::component {
 
     nts::IComponent *NandGate::clone() const
     {
-        return new AndGate();
+        return new NandGate();
     }
 
     nts::Tristate NandGate::operation(nts::Tristate left, nts::Tristate right)

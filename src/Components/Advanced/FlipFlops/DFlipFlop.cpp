@@ -40,7 +40,7 @@ namespace nts::component
     Pin& DFlipFlop::operator [](size_t pin)
     {
         if (pin <= 0 || pin >= 5) {
-            throw Pin::BadPin("4008: bad pin, can't access pin n°" + std::to_string(pin) + ".");
+            throw Pin::BadPin("DFlipFlop: bad pin, can't access pin n°" + std::to_string(pin) + ".");
         } else if (pin >= 1 && pin <= 2) {
             return _forks[pin - 1][1];
         } else {

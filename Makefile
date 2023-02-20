@@ -27,6 +27,10 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Components/MultiGate/Component4069.cpp			\
 					src/Components/Advanced/FullAdder.cpp				\
 					src/Components/Advanced/Component4008.cpp			\
+					src/Components/Advanced/4040Counter.cpp				\
+					src/Components/Advanced/FlipFlops/SRFlipFlop.cpp	\
+					src/Components/Advanced/FlipFlops/DFlipFlop.cpp		\
+					src/Components/Advanced/FlipFlops/JKFlipFlop.cpp	\
 					src/FileParser.cpp									\
 					src/Handler.cpp										\
 					src/main.cpp										\
@@ -38,6 +42,7 @@ SRC 			=	src/Components/AComponent.cpp						\
 INCLUDES 		=	-Iinclude -Isrc -Isrc/Pin -Isrc/Components 				\
 					-Isrc/Components/Basic -Isrc/Components/InputOutput 	\
 					-Isrc/Components/MultiGate -Isrc/Components/Advanced	\
+					-Isrc/Components/Advanced/FlipFlops						\
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++20
 

@@ -9,7 +9,6 @@
 #include "Pin.hpp"
 #include "PinLink.hpp"
 
-
 namespace nts::component
 {
     void AComponent::setLink(nts::Pin *p1, nts::Pin *p2)
@@ -48,12 +47,19 @@ namespace nts::component
 
     void AComponent::simulate(std::size_t tick)
     {
-        if (_lastTick == tick) {
+        nts::Tristate oldValue;
+
+        if (_lastTick == tick && !_hasChanged) {
             return;
         }
         _lastTick = tick;
+        _hasChanged = false;
         for (size_t i = 0; i < _pins.size(); i++) {
+            oldValue = _pins[i].getValue();
             _pins[i].setValue(this->compute(i + 1));
+            if (oldValue != _pins[i].getValue() && _pins[i].getPinType() == Pin::INPUT) {
+                _hasChanged = true;
+            }
         }
     }
 }

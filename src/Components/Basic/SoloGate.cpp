@@ -27,11 +27,11 @@ namespace nts::component {
     nts::Tristate SoloGate::compute(std::size_t pin)
     {
         if (pin == 3) {
-            _pins[0].simulate(_lastTick);
-            _pins[1].simulate(_lastTick);
             return operation(_pins[0].getValue(), _pins[1].getValue());
+        } else {
+            (*this)[pin].simulate(_lastTick);
+            return (*this)[pin].getValue();
         }
-        return (*this)[pin].getValue();
     }
 
     nts::IComponent *AndGate::clone() const

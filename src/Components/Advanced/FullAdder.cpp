@@ -40,12 +40,9 @@ namespace nts::component
 
     void FullAdder::simulate(std::size_t lastTick)
     {
-        if (_lastTick == lastTick) {
-            return;
-        }
         _lastTick = lastTick;
-        (*this)[4].setValue(this->compute(4));
-        (*this)[5].setValue(this->compute(5));
+        _sumXor.simulate(lastTick);
+        _carryOr.simulate(lastTick);
     }
 
     nts::IComponent* FullAdder::clone() const

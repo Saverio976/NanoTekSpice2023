@@ -25,15 +25,10 @@ namespace nts::component
 
     void Component4008::simulate(std::size_t lastTick)
     {
-        if (lastTick == _lastTick) {
-            return;
-        }
         _lastTick = lastTick;
-        (*this)[10].setValue(this->compute(10));
-        (*this)[11].setValue(this->compute(11));
-        (*this)[12].setValue(this->compute(12));
-        (*this)[13].setValue(this->compute(13));
-        (*this)[14].setValue(this->compute(14));
+        for (int i = 0; i < 6; i++) {
+            _adders[i].simulate(lastTick);
+        }
     }
 
     nts::IComponent* Component4008::clone() const

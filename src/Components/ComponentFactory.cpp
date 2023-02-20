@@ -21,6 +21,8 @@
 #include "Advanced/Component4008.hpp"
 #include "SRFlipFlop.hpp"
 #include "DFlipFlop.hpp"
+#include "JKFlipFlop.hpp"
+#include "4040Counter.hpp"
 
 namespace nts::component
 {
@@ -44,8 +46,10 @@ namespace nts::component
         this->registerComponent("4071", new QuadGate<OrGate>);
         this->registerComponent("4081", new QuadGate<AndGate>);
         this->registerComponent("4008", new Component4008);
+        this->registerComponent("4040", new Component4040);
         this->registerComponent("SRFlipFlop", new SRFlipFlop);
         this->registerComponent("DFlipFlop", new DFlipFlop);
+        this->registerComponent("JKFlipFlop", new JKFlipFlop);
         // TODO: add all component that we know of
     }
 

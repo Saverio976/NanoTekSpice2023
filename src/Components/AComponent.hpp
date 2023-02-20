@@ -29,6 +29,7 @@ namespace nts::component
         protected:
             std::vector<Pin> _pins;
             std::size_t _lastTick = 0;
+            bool _hasChanged = false;
     };
 }
 

@@ -13,11 +13,8 @@ namespace nts::component
 {
     SRFlipFlop::SRFlipFlop()
     {
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 3));
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 4));
-
-        this->setLink(3, _nands[1], 2);
-        this->setLink(4, _nands[0], 2);
+        _nands[0].setLink(2, _nands[1], 3);
+        _nands[1].setLink(2, _nands[0], 3);
     }
 
     nts::Tristate SRFlipFlop::compute(std::size_t pin)
@@ -28,14 +25,9 @@ namespace nts::component
 
     void SRFlipFlop::simulate(std::size_t tick)
     {
-        if (_lastTick == tick) {
-            return;
-        }
         _lastTick = tick;
-        (*this)[3].setValue(_nands[0][3].getValue());
-        (*this)[4].setValue(_nands[1][3].getValue());
-        _nands[0].simulate(_lastTick);
-        _nands[1].simulate(_lastTick);
+        _nands[0].simulate(tick);
+        _nands[1].simulate(tick);
     }
 
     nts::IComponent* SRFlipFlop::clone() const
@@ -50,7 +42,7 @@ namespace nts::component
         } else if (pin >= 1 && pin <= 2) {
             return _nands[pin - 1][1];
         } else {
-            return _pins[pin - 3];
+            return _nands[pin - 3][3];
         }
     }
 }

@@ -20,6 +20,7 @@
 #include "MultiGate/Component4069.hpp"
 #include "Advanced/Component4008.hpp"
 #include "SRFlipFlop.hpp"
+#include "DFlipFlop.hpp"
 
 namespace nts::component
 {
@@ -44,6 +45,7 @@ namespace nts::component
         this->registerComponent("4081", new QuadGate<AndGate>);
         this->registerComponent("4008", new Component4008);
         this->registerComponent("SRFlipFlop", new SRFlipFlop);
+        this->registerComponent("DFlipFlop", new DFlipFlop);
         // TODO: add all component that we know of
     }
 

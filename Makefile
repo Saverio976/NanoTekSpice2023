@@ -28,6 +28,7 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Components/Advanced/FullAdder.cpp				\
 					src/Components/Advanced/Component4008.cpp			\
 					src/Components/Advanced/FlipFlops/SRFlipFlop.cpp	\
+					src/Components/Advanced/FlipFlops/DFlipFlop.cpp		\
 					src/FileParser.cpp									\
 					src/Handler.cpp										\
 					src/main.cpp										\

@@ -1,5 +1,3 @@
-error_happend=0
-
 for FILE in $(ls tests/nts_files/single/*.nts | sort)
 do
     error_msg=$(echo -n "" | ./nanotekspice $FILE 2>&1 >/dev/null)
@@ -8,8 +6,9 @@ do
         error_happend=84
         echo "Failed to load $FILE"
         echo "$error_msg"
-        echo ""
+        echo
     fi
 done
 
+echo
 exit $error_happend

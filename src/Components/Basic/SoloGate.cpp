@@ -13,25 +13,25 @@
 namespace nts::component {
     SoloGate::SoloGate()
     {
-        _pins.push_back(Pin(*this, Pin::INPUT, 1));
-        _pins.push_back(Pin(*this, Pin::INPUT, 2));
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 3));
+        addPin(1, Pin::INPUT);
+        addPin(2, Pin::INPUT);
+        addPin(3, Pin::OUTPUT);
     }
 
     void SoloGate::QuickLink(Pin *i1, Pin *i2)
     {
-        setLink(&_pins[0], i1);
-        setLink(&_pins[1], i2);
+        setLink(&(*this)[1], i1);
+        setLink(&(*this)[2], i2);
     }
 
     nts::Tristate SoloGate::compute(std::size_t pin)
     {
         if (pin == 3) {
-            _pins[0].simulate(_lastTick);
-            _pins[1].simulate(_lastTick);
-            return operation(_pins[0].getValue(), _pins[1].getValue());
+            return operation((*this)[1].getValue(), (*this)[2].getValue());
+        } else {
+            (*this)[pin].simulate(_lastTick);
+            return (*this)[pin].getValue();
         }
-        return (*this)[pin].getValue();
     }
 
     nts::IComponent *AndGate::clone() const

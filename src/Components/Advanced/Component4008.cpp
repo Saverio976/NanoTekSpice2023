@@ -9,66 +9,43 @@
 
 namespace nts::component
 {
+    void Component4008::addInput()
+    {
+        addPin(7, &_adders[0][1]);
+        addPin(6, &_adders[0][2]);
+        addPin(9, &_adders[0][3]);
+
+        addPin(5, &_adders[1][1]);
+        addPin(4, &_adders[1][2]);
+
+        addPin(3, &_adders[2][1]);
+        addPin(2, &_adders[2][2]);
+
+        addPin(1, &_adders[3][1]);
+        addPin(15, &_adders[3][2]);
+    }
+
+    void Component4008::addOutput()
+    {
+        addPin(10, &_adders[0][4]);
+        addPin(11, &_adders[1][4]);
+        addPin(12, &_adders[2][4]);
+        addPin(13, &_adders[3][4]);
+        addPin(14, &_adders[3][5]);
+    }
+
     Component4008::Component4008()
     {
+        addInput();
+        addOutput();
         for (int i = 0; i < 3; i++)
         {
             _adders[i].setLink(5, _adders[i + 1], 3);
         }
     }
 
-    nts::Tristate Component4008::compute(std::size_t pin)
-    {
-        (*this)[pin].simulate(_lastTick);
-        return (*this)[pin].getValue();
-    }
-
-    void Component4008::simulate(std::size_t lastTick)
-    {
-        if (lastTick == _lastTick) {
-            return;
-        }
-        _lastTick = lastTick;
-        (*this)[10].setValue(this->compute(10));
-        (*this)[11].setValue(this->compute(11));
-        (*this)[12].setValue(this->compute(12));
-        (*this)[13].setValue(this->compute(13));
-        (*this)[14].setValue(this->compute(14));
-    }
-
     nts::IComponent* Component4008::clone() const
     {
         return new Component4008();
-    }
-
-    Pin& Component4008::operator [](size_t pin)
-    {
-        switch (pin)
-        {
-        case 6:
-        case 7:
-            return _adders[0][pin - 5];
-        case 9:
-            return _adders[0][3];
-        case 2:
-        case 3:
-            return _adders[2][4 - pin];
-        case 4:
-        case 5:
-            return _adders[1][pin - 3];
-        case 1:
-            return _adders[3][1];
-        case 15:
-            return _adders[3][2];
-        case 10:
-        case 11:
-        case 12:
-        case 13:
-            return _adders[pin - 10][4];
-        case 14:
-            return _adders[3][5];
-        default:
-            throw Pin::BadPin("4008: bad pin, can't access pin n°" + std::to_string(pin) + ".");
-        }
     }
 }

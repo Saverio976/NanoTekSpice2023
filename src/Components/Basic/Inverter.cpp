@@ -12,8 +12,8 @@
 namespace nts::component {
     Inverter::Inverter()
     {
-        _pins.push_back(Pin(*this, Pin::INPUT, 1));
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 2));
+        addPin(1, Pin::INPUT);
+        addPin(2, Pin::OUTPUT);
     }
 
     static nts::Tristate triNot(nts::Tristate v)
@@ -30,10 +30,10 @@ namespace nts::component {
     Tristate Inverter::compute(std::size_t pin)
     {
         if (pin == 1) {
-            return _pins[0].getValue();
+            return (*this)[1].getValue();
         } else if (pin == 2) {
-            _pins[0].simulate(_lastTick);
-            return triNot(_pins[0].getValue());
+            (*this)[1].simulate(_lastTick);
+            return triNot((*this)[1].getValue());
         }
         throw OutOfRange("Inverter: Chipset doesn't have enough pins");
     }

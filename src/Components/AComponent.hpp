@@ -6,9 +6,11 @@
 */
 
 #pragma once
-#include <vector>
+#include <map>
 #include <ostream>
+#include <list>
 #include "IComponent.hpp"
+#include "Pin.hpp"
 #include "BaseError.hpp"
 
 namespace nts::component
@@ -20,6 +22,7 @@ namespace nts::component
                 using BaseError::BaseError;
             };
 
+            nts::Tristate compute(std::size_t pinIndex) override;
             void simulate(std::size_t tick) override;
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
             void setLink(nts::Pin *p1, nts::Pin *p2) override;
@@ -27,8 +30,13 @@ namespace nts::component
 
             nts::Pin &operator [](std::size_t index) override;
         protected:
-            std::vector<Pin> _pins;
+            std::map<size_t, Pin *> _pinMap;
+            std::list<Pin> _innerPins;
+            bool _hasChanged;
             std::size_t _lastTick = 0;
+
+            void addPin(std::size_t index, Pin::PinType type);
+            void addPin(std::size_t index, Pin *pin);
     };
 }
 

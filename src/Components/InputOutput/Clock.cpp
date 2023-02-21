@@ -26,9 +26,4 @@ namespace nts::component::IO
     {
         return new Clock();
     }
-
-    nts::Tristate Clock::getValue()
-    {
-        return this->_pins[0].getValue();
-    }
 }

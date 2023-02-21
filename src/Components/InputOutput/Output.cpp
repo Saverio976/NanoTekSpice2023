@@ -7,16 +7,17 @@
 
 
 #include "Output.hpp"
+#include "Pin.hpp"
 namespace nts::component::IO
 {
     Output::Output()
     {
-        _pins.push_back(Pin(*this, Pin::INPUT, 1));
+        addPin(1, Pin::INPUT);
     }
 
     nts::Tristate Output::getValue()
     {
-        return _pins[0].getValue();
+        return (*this)[1].getValue();
     }
 
     nts::Tristate Output::compute(std::size_t pin)

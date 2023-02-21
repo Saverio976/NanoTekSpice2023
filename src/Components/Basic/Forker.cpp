@@ -12,20 +12,19 @@ namespace nts::component
 {
     Forker::Forker()
     {
-        _pins.push_back(Pin(*this, Pin::INPUT, 1));
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 2));
+        addPin(1, Pin::INPUT);
+        addPin(2, Pin::OUTPUT);
     }
 
     nts::Tristate Forker::compute(std::size_t pin)
     {
         if (pin == 1) {
-            _pins[0].simulate(_lastTick);
-            return _pins[0].getValue();
+            (*this)[1].simulate(_lastTick);
+            return (*this)[1].getValue();
         } else if (pin == 2) {
-            return _pins[0].getValue();
-        } else {
-            throw OutOfRange("Forker only has 2 pins but tried to access n°" + std::to_string(pin) + ".");
+            return (*this)[1].getValue();
         }
+        (*this)[pin];
     }
 
     nts::IComponent* Forker::clone() const

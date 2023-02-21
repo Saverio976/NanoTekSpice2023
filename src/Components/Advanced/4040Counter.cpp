@@ -27,12 +27,11 @@ namespace nts::component
 {
     Component4040::Component4040()
     {
-        _pins.push_back(Pin(*this, Pin::INPUT, 10));
-        _pins.push_back(Pin(*this, Pin::INPUT, 11));
+        addPin(10, Pin::INPUT);
+        addPin(11, Pin::INPUT);
 
         for (auto &pair: _indexMap) {
-            _pins.push_back(Pin(*this, Pin::OUTPUT, pair.first));
-            _pinMap[pair.first] = &_pins.back();
+            addPin(pair.first, Pin::OUTPUT);
         }
     }
 
@@ -85,11 +84,11 @@ namespace nts::component
         call(10);
         call(11);
 
-        for (size_t i = 1; i < 16; i++) {
-            if (i == 8 || i == 10 || i == 11) {
+        for (auto &[index, pin]: _pinMap) {
+            if (index == 10 || index == 11) {
                 continue;
             }
-            (*this)[i].setValue(this->compute(i));
+            pin->setValue(compute(index));
         }
     }
 
@@ -110,18 +109,5 @@ namespace nts::component
         }
         _lastIncrement = _lastTick;
         _counter += 1;
-    }
-
-    Pin& Component4040::operator [](size_t pin)
-    {
-        if (_pinMap.contains(pin)) {
-            return *_pinMap[pin];
-        } else if (pin == 10) {
-            return _pins[0];
-        } else if (pin == 11) {
-            return _pins[1];
-        } else {
-            throw Pin::BadPin("4040: No pin n°" + std::to_string(pin));
-        }
     }
 }

@@ -1,0 +1,10 @@
+in_01=0
+in_02=U
+in_05=1
+in_06=1
+in_08=1
+in_09=0
+in_12=U
+in_13=U
+simulate
+display

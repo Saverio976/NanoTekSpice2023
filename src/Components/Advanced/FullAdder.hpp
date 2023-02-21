@@ -17,11 +17,7 @@ namespace nts::component
         public:
             FullAdder();
 
-            nts::Tristate compute(std::size_t pin) override;
-            void simulate(std::size_t lastTick) override;
             nts::IComponent *clone() const final;
-
-            Pin &operator [](size_t pin) override;
         private:
             std::array<Forker, 3> _forkers;
             AndGate _abAnd;
@@ -33,6 +29,5 @@ namespace nts::component
 
             OrGate _inOr;
             OrGate _carryOr;
-
     };
 }

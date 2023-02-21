@@ -8,7 +8,6 @@
 #pragma once
 
 #include "IComponent.hpp"
-#include "Pin.hpp"
 #include "AComponent.hpp"
 
 namespace nts::component::IO

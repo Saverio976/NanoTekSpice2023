@@ -15,8 +15,6 @@ namespace nts::component::IO
         public:
             void simulate(std::size_t tick) override;
 
-            nts::Tristate getValue() override;
-
             nts::IComponent *clone() const final;
     };
 }

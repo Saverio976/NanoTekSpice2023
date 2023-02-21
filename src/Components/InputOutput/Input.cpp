@@ -12,7 +12,7 @@ namespace nts::component::IO
 {
     Input::Input()
     {
-        _pins.push_back(Pin(*this, Pin::OUTPUT, 1));
+        addPin(1, Pin::OUTPUT);
     }
 
     void Input::setValue(nts::Tristate new_val)
@@ -28,7 +28,7 @@ namespace nts::component::IO
 
     nts::Tristate Input::getValue()
     {
-        return this->_pins[0].getValue();
+        return (*this)[1].getValue();
     }
 
     nts::IComponent *Input::clone() const

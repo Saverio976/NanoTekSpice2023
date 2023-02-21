@@ -15,7 +15,6 @@ namespace nts::component::IO
     class TrueInput: public AComponent {
         public:
             TrueInput();
-            nts::Tristate compute(size_t pin) override;
 
             nts::IComponent *clone() const final;
     };
@@ -23,7 +22,6 @@ namespace nts::component::IO
     class FalseInput: public AComponent {
         public:
             FalseInput();
-            nts::Tristate compute(size_t pin) override;
 
             nts::IComponent *clone() const final;
     };

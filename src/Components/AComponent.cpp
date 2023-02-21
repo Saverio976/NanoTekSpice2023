@@ -11,6 +11,12 @@
 
 namespace nts::component
 {
+    nts::Tristate AComponent::compute(std::size_t pinIndex)
+    {
+        (*this)[pinIndex].simulate(_lastTick);
+        return (*this)[pinIndex].getValue();
+    }
+
     void AComponent::setLink(nts::Pin *p1, nts::Pin *p2)
     {
         PinLink link(nullptr, nullptr);
@@ -34,15 +40,24 @@ namespace nts::component
         setLink(&(*this)[pin], &other[otherPin]);
     }
 
+    void AComponent::addPin(std::size_t index, Pin::PinType type)
+    {
+        _innerPins.emplace_back(Pin(*this, type, index));
+        _pinMap.emplace(index, &_innerPins.back());
+    }
+
+    void AComponent::addPin(std::size_t index, Pin *pin)
+    {
+        _pinMap.emplace(index, pin);
+    }
+
     nts::Pin& AComponent::operator [](std::size_t index)
     {
-        if (index == 0) {
-            throw Pin::BadPin("Default component: bad pin, can't access pin n°" + std::to_string(index) + ".");
+        if (!_pinMap.contains(index)) {
+            throw Pin::BadPin("Bad pin, can't access pin n°" + std::to_string(index) + ".");
+        } else {
+            return *_pinMap[index];
         }
-        if (index - 1 >= _pins.size()) {
-            throw OutOfRange("Default component: chipset doesn't have enough pins to access pin n°" + std::to_string(index) + ".");
-        }
-        return _pins[index - 1];
     }
 
     void AComponent::simulate(std::size_t tick)
@@ -54,10 +69,10 @@ namespace nts::component
         }
         _lastTick = tick;
         _hasChanged = false;
-        for (size_t i = 0; i < _pins.size(); i++) {
-            oldValue = _pins[i].getValue();
-            _pins[i].setValue(this->compute(i + 1));
-            if (oldValue != _pins[i].getValue() && _pins[i].getPinType() == Pin::INPUT) {
+        for (auto &[index, pin] : _pinMap) {
+            oldValue = pin->getValue();
+            pin->setValue(this->compute(index));
+            if (pin->getPinType() == Pin::INPUT && oldValue != pin->getValue()) {
                 _hasChanged = true;
             }
         }

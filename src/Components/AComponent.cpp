@@ -8,7 +8,6 @@
 #include "AComponent.hpp"
 #include "Pin.hpp"
 #include "PinLink.hpp"
-#include <iostream>
 
 namespace nts::component
 {
@@ -65,7 +64,7 @@ namespace nts::component
     {
         nts::Tristate oldValue;
 
-        if (_lastTick == tick) {
+        if (_lastTick == tick && !_hasChanged) {
             return;
         }
         _lastTick = tick;

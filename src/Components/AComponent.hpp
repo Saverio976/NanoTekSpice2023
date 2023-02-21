@@ -32,7 +32,7 @@ namespace nts::component
         protected:
             std::map<size_t, Pin *> _pinMap;
             std::list<Pin> _innerPins;
-            bool _hasChanged;
+            bool _hasChanged = false;
             std::size_t _lastTick = 0;
 
             void addPin(std::size_t index, Pin::PinType type);

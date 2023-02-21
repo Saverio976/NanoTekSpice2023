@@ -21,14 +21,10 @@ namespace nts::component
             nts::Tristate compute(std::size_t pin) override;
             void simulate(std::size_t lastTick) override;
             nts::IComponent *clone() const final;
-
-            Pin &operator [](size_t pin) override;
         private:
             size_t _counter = 0;
             size_t _lastIncrement = 0;
-            std::map<size_t, Pin *> _pinMap;
             static const std::map<size_t, size_t> _indexMap;
-
 
             void reset();
             void increment();

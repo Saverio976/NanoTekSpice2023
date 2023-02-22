@@ -37,7 +37,8 @@ SRC 			=	src/Components/AComponent.cpp						\
 					src/Pin/Pin.cpp										\
 					src/Pin/PinLink.cpp									\
 					src/Shell.cpp										\
-					src/BaseError.cpp
+					src/BaseError.cpp									\
+					src/Circuit.cpp
 
 INCLUDES 		=	-Iinclude -Isrc -Isrc/Pin -Isrc/Components 				\
 					-Isrc/Components/Basic -Isrc/Components/InputOutput 	\

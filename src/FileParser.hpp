@@ -8,12 +8,12 @@
 #pragma once
 
 #include <cstddef>
+#include <memory>
 #include "BaseError.hpp"
+#include "Circuit.hpp"
 
 namespace nts
 {
-    class Handler;
-
     class FileParser {
         public:
             class FileParsingError : public BaseError
@@ -21,7 +21,7 @@ namespace nts
                 using BaseError::BaseError;
             };
 
-            FileParser(const std::string &fileName, Handler *handler);
+            FileParser(const std::string &fileName, Circuit *circuit);
 
             void loadFile(const std::string &fileName);
 
@@ -32,7 +32,7 @@ namespace nts
                 LINKS,
             };
 
-            Handler *_handler;
+            Circuit *_circuit;
 
             size_t _lineCount = 0;
             const std::string &_fileName;

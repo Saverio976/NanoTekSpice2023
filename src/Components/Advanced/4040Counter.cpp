@@ -37,6 +37,8 @@ namespace nts::component
 
     nts::Tristate Component4040::compute(std::size_t pin)
     {
+        nts::Tristate old_value = nts::Undefined;
+
         if (pin == 11) {
             (*this)[11].simulate(_lastTick);
             if ((*this)[11].getValue() == nts::True) {
@@ -44,8 +46,9 @@ namespace nts::component
             }
             return ((*this)[11].getValue());
         } else if (pin == 10) {
+            old_value = (*this)[10].getValue();
             (*this)[10].simulate(_lastTick);
-            if ((*this)[10].getValue() == nts::True) {
+            if ((*this)[10].getValue() == nts::False && old_value == nts::True) {
                 increment();
             }
             return (*this)[10].getValue();

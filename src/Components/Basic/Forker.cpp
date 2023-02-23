@@ -24,7 +24,7 @@ namespace nts::component
         } else if (pin == 2) {
             return (*this)[1].getValue();
         }
-        (*this)[pin];
+        return (*this)[pin].getValue();
     }
 
     nts::IComponent* Forker::clone() const

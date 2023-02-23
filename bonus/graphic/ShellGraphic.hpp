@@ -8,6 +8,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <string>
 #include <vector>
@@ -35,4 +36,6 @@ class ShellGraphic: public nts::Shell
         int _size_y = 20;
         int _padding_middle = 5;
         int _padding_extern = 10;
+
+        sf::Font _font;
 };

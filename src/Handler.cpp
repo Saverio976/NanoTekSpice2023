@@ -23,7 +23,6 @@ namespace nts
 
     Handler::~Handler()
     {
-        delete _shell;
     }
 
     void Handler::readInput()
@@ -63,7 +62,6 @@ namespace nts
 
     void Handler::changeDefaultShell(Shell *shell)
     {
-        delete this->_shell;
         this->_shell = shell;
     }
 }

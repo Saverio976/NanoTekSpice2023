@@ -6,7 +6,9 @@
 //
 
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -23,6 +25,7 @@ ShellGraphic::ShellGraphic(nts::Handler *handler):
     _window(sf::VideoMode(800, 600), "NanoTekSpice", sf::Style::Close)
 {
     this->_window.setVerticalSyncEnabled(true);
+    this->_font.loadFromFile("bonus/graphic/fira_code_nerd_font.ttf");
 }
 
 void ShellGraphic::mainLoop()
@@ -121,6 +124,7 @@ void ShellGraphic::drawGate(const std::string &name, const sf::Vector2f &pos, co
 {
     auto component = this->_handler->getCircuit().getChipset(name);
     sf::RectangleShape rect(size);
+    sf::Text text;
 
     if (component == nullptr) {
         return;
@@ -128,4 +132,9 @@ void ShellGraphic::drawGate(const std::string &name, const sf::Vector2f &pos, co
     rect.setPosition(pos.x, pos.y);
     rect.setFillColor(color);
     this->_window.draw(rect);
+    text.setString(name);
+    text.setPosition(pos);
+    text.setFont(this->_font);
+    text.setCharacterSize(15);
+    this->_window.draw(text);
 }

@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include "ComponentFactory.hpp"
 #include "IComponent.hpp"
 #include "Pin.hpp"
@@ -77,5 +78,15 @@ namespace nts::component
         }
         newComp.reset(this->_components[type]->clone());
         return newComp;
+    }
+
+    std::vector<std::string> ComponentFactory::getComponentTypes() const
+    {
+        std::vector<std::string> types;
+
+        for (auto &it : this->_components) {
+            types.push_back(it.first);
+        }
+        return types;
     }
 }

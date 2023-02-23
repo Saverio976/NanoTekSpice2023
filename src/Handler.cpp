@@ -17,13 +17,18 @@
 namespace nts
 {
     Handler::Handler():
-        _shell(this)
+        _shell(new Shell(this))
     {
+    }
+
+    Handler::~Handler()
+    {
+        delete _shell;
     }
 
     void Handler::readInput()
     {
-        this->_shell.mainLoop();
+        this->_shell->mainLoop();
     }
 
     void Handler::loadFile(const std::string &fileName)
@@ -54,5 +59,11 @@ namespace nts
     Circuit &Handler::getCircuit()
     {
         return this->_circuit;
+    }
+
+    void Handler::changeDefaultShell(Shell *shell)
+    {
+        delete this->_shell;
+        this->_shell = shell;
     }
 }

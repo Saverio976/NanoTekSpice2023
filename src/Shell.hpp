@@ -27,15 +27,16 @@ namespace nts
             };
 
             Shell(Handler *handler);
-            ~Shell() = default;
+            virtual ~Shell() = default;
 
-            void mainLoop();
+            virtual void mainLoop();
             static void setIsEndLoop(bool isEndLoop);
 
-        private:
+        protected:
             bool _isEnd = false;
             Handler *_handler;
 
+        private:
             std::string getInputName(const std::string &all) const;
             std::size_t getInputValue(const std::string &all) const;
 

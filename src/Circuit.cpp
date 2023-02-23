@@ -5,8 +5,8 @@
 // circuit
 //
 
-#include "Circuit.hpp"
 #include <cstddef>
+#include "Circuit.hpp"
 
 namespace nts {
     void Circuit::addChipset(const std::string &type, const std::string &name)

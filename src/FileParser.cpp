@@ -11,6 +11,7 @@
 #include <sstream>
 #include <algorithm>
 #include <string>
+#include "Circuit.hpp"
 #include "string.h"
 #include "Handler.hpp"
 #include "FileParser.hpp"
@@ -32,8 +33,8 @@ static void trim_line(std::string &str)
 
 namespace nts
 {
-    FileParser::FileParser(const std::string &fileName, Handler *handler)
-        : _handler(handler),
+    FileParser::FileParser(const std::string &fileName, Circuit *circuit):
+        _circuit(circuit),
         _fileName(fileName)
     {
         this->loadFile(fileName);
@@ -89,9 +90,9 @@ namespace nts
             if (std::count(rightPart.begin(), rightPart.end(), ':') != 0) {
                 throw FileParsingError("Invalid chipset name, must not contain ':'");
             }
-            this->_handler->addChipset(leftPart, rightPart);
+            this->_circuit->addChipset(leftPart, rightPart);
         } else if (type == LINKS) {
-            this->_handler->addLink(
+            this->_circuit->addLink(
                 this->parseLinkName(leftPart), this->parseLinkPin(leftPart),
                 this->parseLinkName(rightPart), this->parseLinkPin(rightPart)
             );
@@ -119,6 +120,6 @@ namespace nts
         if (!f.eof()) {
             throw FileParsingError("Unable to read file " + fileName);
         }
-        this->_handler->checkGoodParsing();
+        this->_circuit->checkGoodParsing();
     }
 }

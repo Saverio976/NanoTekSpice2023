@@ -39,6 +39,7 @@ SRC 			=	../../src/Components/AComponent.cpp						\
 					../../src/BaseError.cpp									\
 					../../src/Circuit.cpp									\
 					ShellGraphic.cpp										\
+					PositionGate.cpp										\
 					Main.cpp
 
 INCLUDES 		=	-I../../include -I../../src -I../../src/Pin -I../../src/Components 				\

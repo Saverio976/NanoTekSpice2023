@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include "Shell.hpp"
+#include "PositionGate.hpp"
 
 class ShellGraphic: public nts::Shell
 {
@@ -24,14 +25,15 @@ class ShellGraphic: public nts::Shell
         sf::RenderWindow _window;
 
         void drawGate(const std::string &name, const sf::Vector2f &pos, const sf::Vector2f &size, const sf::Color &color = sf::Color::Magenta);
-
         void draw();
-        void drawInputs();
-        void drawOutputs();
-        void drawOtherGates();
+
+        void initInputs();
+        void initOutputs();
+        void initOtherGates();
 
         std::vector<std::string> _outputsType = {"output"};
         std::vector<std::string> _inputsType = {"input", "clock", "true", "false"};
+        std::vector<PositionGate> _gates;
         int _size_x = 20;
         int _size_y = 20;
         int _padding_middle = 5;

@@ -25,11 +25,19 @@ ShellGraphic::ShellGraphic(nts::Handler *handler):
     _window(sf::VideoMode(800, 600), "NanoTekSpice", sf::Style::Close)
 {
     this->_window.setVerticalSyncEnabled(true);
-    this->_font.loadFromFile("bonus/graphic/fira_code_nerd_font.ttf");
+    if (!this->_font.loadFromFile("bonus/graphic/fira_code_nerd_font.ttf")) {
+        this->_font.loadFromFile("fira_code_nerd_font.ttf");
+    }
+    this->initInputs();
+    this->initOutputs();
+    this->initOtherGates();
 }
 
 void ShellGraphic::mainLoop()
 {
+    this->initInputs();
+    this->initOutputs();
+    this->initOtherGates();
     while (this->_isEnd == false && this->_window.isOpen()) {
         this->draw();
         sf::Event event;
@@ -44,13 +52,13 @@ void ShellGraphic::mainLoop()
 void ShellGraphic::draw()
 {
     this->_window.clear(sf::Color::Black);
-    this->drawOtherGates();
-    this->drawInputs();
-    this->drawOutputs();
+    for (auto &gate : this->_gates) {
+        this->drawGate(gate.getName(), gate.getPosition(), gate.getSize(), gate.getColor());
+    }
     this->_window.display();
 }
 
-void ShellGraphic::drawInputs()
+void ShellGraphic::initInputs()
 {
     sf::Vector2f pos(0 + this->_padding_extern, 0 + this->_padding_extern);
     sf::Vector2f size(this->_size_x, this->_size_y);
@@ -63,13 +71,14 @@ void ShellGraphic::drawInputs()
             continue;
         }
         for (auto &input : components) {
-            this->drawGate(input, pos, size);
+            auto gate = this->_handler->getCircuit().getChipset(input);
+            this->_gates.push_back(PositionGate(pos, size, sf::Color::Blue, gate, input));
             pos.y += size.y + this->_padding_middle;
         }
     }
 }
 
-void ShellGraphic::drawOutputs()
+void ShellGraphic::initOutputs()
 {
     sf::Vector2f pos(
         this->_window.getSize().x - this->_padding_extern - this->_size_x,
@@ -85,13 +94,14 @@ void ShellGraphic::drawOutputs()
             continue;
         }
         for (auto &output : components) {
-            this->drawGate(output, pos, size);
+            auto gate = this->_handler->getCircuit().getChipset(output);
+            this->_gates.push_back(PositionGate(pos, size, sf::Color::Magenta, gate, output));
             pos.y += size.y + this->_padding_middle;
         }
     }
 }
 
-void ShellGraphic::drawOtherGates()
+void ShellGraphic::initOtherGates()
 {
     nts::component::ComponentFactory componentFactory;
     sf::Vector2f pos(
@@ -114,7 +124,8 @@ void ShellGraphic::drawOtherGates()
             continue;
         }
         for (auto &component : components) {
-            this->drawGate(component, pos, size);
+            auto gate = this->_handler->getCircuit().getChipset(component);
+            this->_gates.push_back(PositionGate(pos, size, sf::Color::Cyan, gate, component));
             pos.y += size.y + this->_padding_middle;
         }
     }

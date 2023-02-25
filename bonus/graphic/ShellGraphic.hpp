@@ -25,11 +25,13 @@ class ShellGraphic: public nts::Shell
         sf::RenderWindow _window;
 
         void drawGate(const std::string &name, const sf::Vector2f &pos, const sf::Vector2f &size, const sf::Color &color = sf::Color::Magenta);
+        void drawGatesLinks(PositionGate &gate);
         void draw();
 
         void initInputs();
         void initOutputs();
         void initOtherGates();
+        void initInputBox();
 
         std::vector<std::string> _outputsType = {"output"};
         std::vector<std::string> _inputsType = {"input", "clock", "true", "false"};
@@ -40,4 +42,8 @@ class ShellGraphic: public nts::Shell
         int _padding_extern = 10;
 
         sf::Font _font;
+
+        std::string _inputBoxString = "";
+        sf::Text _inputBoxText;
+        sf::RectangleShape _inputBox;
 };

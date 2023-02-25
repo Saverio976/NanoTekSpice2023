@@ -77,6 +77,11 @@ namespace nts::component
             }
         }
     }
+
+    const std::map<std::size_t, Pin *> &AComponent::getPins() const
+    {
+        return _pinMap;
+    }
 }
 
 std::ostream & operator <<(std::ostream &os, nts::Tristate val)

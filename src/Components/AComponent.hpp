@@ -27,6 +27,7 @@ namespace nts::component
             void setLink(std::size_t pin, nts::IComponent &other, std::size_t otherPin) override;
             void setLink(nts::Pin *p1, nts::Pin *p2) override;
 
+            const std::map<std::size_t, Pin *> &getPins() const override;
 
             nts::Pin &operator [](std::size_t index) override;
         protected:

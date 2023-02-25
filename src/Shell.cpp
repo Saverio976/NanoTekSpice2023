@@ -66,27 +66,33 @@ namespace nts
         return value;
     }
 
+    bool Shell::interpretLine(std::string line)
+    {
+        if (line.find('=') != line.npos) {
+            this->setInput(this->getInputName(line), this->getInputValue(line));
+        } else if (line == "display") {
+            this->display();
+        } else if (line == "simulate") {
+            this->simulate();
+        } else if (line == "exit") {
+            this->exit();
+        } else if (line == "loop") {
+            this->loop();
+        } else if (line == "help") {
+            this->help();
+        } else {
+            throw UnkownCommand("Unknown command [" + line + "]. Try help to have a list of commands");
+        }
+        return true;
+    }
+
     void Shell::mainLoop()
     {
         std::string line;
 
         std::cout << "> ";
         while (!this->_isEnd && std::getline(std::cin, line)) {
-            if (line.find('=') != line.npos) {
-                this->setInput(this->getInputName(line), this->getInputValue(line));
-            } else if (line == "display") {
-                this->display();
-            } else if (line == "simulate") {
-                this->simulate();
-            } else if (line == "exit") {
-                this->exit();
-            } else if (line == "loop") {
-                this->loop();
-            } else if (line == "help") {
-                this->help();
-            } else {
-                throw UnkownCommand("Unknown command [" + line + "]. Try help to have a list of commands");
-            }
+            this->interpretLine(line);
             std::cout << "> ";
         }
     }

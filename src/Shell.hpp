@@ -30,6 +30,7 @@ namespace nts
             virtual ~Shell() = default;
 
             virtual void mainLoop();
+            bool interpretLine(std::string line);
             static void setIsEndLoop(bool isEndLoop);
 
         protected:

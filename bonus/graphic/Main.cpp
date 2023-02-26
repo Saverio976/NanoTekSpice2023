@@ -78,12 +78,7 @@ int main(int argc, const char *const argv[])
         display_help(argv[0]);
         return 0;
     }
-    // try {
-        handler.loadFile(argv[1]);
-        handler.readInput();
-    // } catch (const std::exception &e) {
-    //     std::cerr << "Exception: " << e.what() << std::endl;
-    //     return 84;
-    // }
+    handler.loadFile(argv[1]);
+    handler.readInput();
     return 0;
 }

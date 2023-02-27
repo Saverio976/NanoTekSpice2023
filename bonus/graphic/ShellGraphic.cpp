@@ -36,20 +36,19 @@ ShellGraphic::ShellGraphic(nts::Handler *handler):
     if (!this->_font.loadFromFile("bonus/graphic/fira_code_nerd_font.ttf")) {
         this->_font.loadFromFile("fira_code_nerd_font.ttf");
     }
-    this->initInputs();
-    this->initOutputs();
-    this->initOtherGates();
     this->initInputBox();
+    this->initSimulateBox();
+    this->initQuitBox();
 }
 
 void ShellGraphic::mainLoop()
 {
     sf::Clock clock;
+    sf::Clock cl_simulate;
 
     this->initInputs();
     this->initOutputs();
     this->initOtherGates();
-    this->initInputBox();
     while (this->_isEnd == false && this->_window.isOpen()) {
         this->draw();
         sf::Event event;
@@ -101,6 +100,21 @@ void ShellGraphic::mainLoop()
                 this->_inputBoxText.setString(this->_inputBoxString);
                 continue;
             }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                if (cl_simulate.getElapsedTime().asSeconds() < 0.1) {
+                    continue;
+                }
+                if (this->_simulateBox.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                    this->interpretLine("simulate");
+                    cl_simulate.restart();
+                    continue;
+                }
+                if (this->_quitBox.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y)) {
+                    this->interpretLine("exit");
+                    cl_simulate.restart();
+                    continue;
+                }
+            }
         }
     }
 }
@@ -114,6 +128,10 @@ void ShellGraphic::draw()
     }
     this->_window.draw(this->_inputBox);
     this->_window.draw(this->_inputBoxText);
+    this->_window.draw(this->_simulateBox);
+    this->_window.draw(this->_simulateText);
+    this->_window.draw(this->_quitBox);
+    this->_window.draw(this->_quitText);
     this->_window.display();
 }
 
@@ -267,4 +285,46 @@ void ShellGraphic::drawGatesLinks(PositionGate &gate)
             break;
         }
     }
+}
+
+void ShellGraphic::initSimulateBox()
+{
+    this->_simulateBox.setFillColor(sf::Color::White);
+    this->_simulateText.setFont(this->_font);
+    this->_simulateText.setCharacterSize(15);
+    this->_simulateText.setFillColor(sf::Color::Black);
+    this->_simulateText.setString("Simulate");
+    this->_simulateBox.setSize(sf::Vector2f(
+        this->_simulateText.getGlobalBounds().width,
+        this->_simulateText.getGlobalBounds().height
+    ));
+    this->_simulateBox.setPosition(
+        this->_inputBox.getPosition().x,
+        this->_inputBox.getPosition().y - (this->_simulateBox.getSize().y + this->_padding_middle)
+    );
+    this->_simulateText.setPosition(
+        this->_simulateBox.getPosition().x,
+        this->_simulateBox.getPosition().y - this->_padding_middle
+    );
+}
+
+void ShellGraphic::initQuitBox()
+{
+    this->_quitBox.setFillColor(sf::Color::White);
+    this->_quitText.setFont(this->_font);
+    this->_quitText.setCharacterSize(15);
+    this->_quitText.setFillColor(sf::Color::Black);
+    this->_quitText.setString("Quit");
+    this->_quitBox.setSize(sf::Vector2f(
+        this->_quitText.getGlobalBounds().width,
+        this->_quitText.getGlobalBounds().height
+    ));
+    this->_quitBox.setPosition(
+        this->_simulateBox.getPosition().x,
+        this->_simulateBox.getPosition().y - (this->_quitBox.getSize().y + this->_padding_middle)
+    );
+    this->_quitText.setPosition(
+        this->_quitBox.getPosition().x,
+        this->_quitBox.getPosition().y - this->_padding_middle
+    );
 }

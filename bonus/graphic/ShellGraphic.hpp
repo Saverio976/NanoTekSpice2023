@@ -32,6 +32,8 @@ class ShellGraphic: public nts::Shell
         void initOutputs();
         void initOtherGates();
         void initInputBox();
+        void initSimulateBox();
+        void initQuitBox();
 
         std::vector<std::string> _outputsType = {"output"};
         std::vector<std::string> _inputsType = {"input", "clock", "true", "false"};
@@ -46,4 +48,10 @@ class ShellGraphic: public nts::Shell
         std::string _inputBoxString = "";
         sf::Text _inputBoxText;
         sf::RectangleShape _inputBox;
+
+        sf::Text _simulateText;
+        sf::RectangleShape _simulateBox;
+
+        sf::Text _quitText;
+        sf::RectangleShape _quitBox;
 };

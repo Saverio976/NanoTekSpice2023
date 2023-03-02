@@ -9,6 +9,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 #include "IComponent.hpp"
 #include "BaseError.hpp"
 
@@ -26,6 +27,8 @@ namespace nts::component
             void removeComponent(const std::string &type);
 
             std::unique_ptr<nts::IComponent> createComponent(const std::string &type);
+
+            std::vector<std::string> getComponentTypes() const;
 
         private:
             std::map<std::string, std::unique_ptr<nts::IComponent>> _components;

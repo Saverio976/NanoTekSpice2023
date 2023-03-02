@@ -26,6 +26,7 @@ namespace nts
     {
         public:
             Handler();
+            ~Handler();
 
             void loadFile(const std::string &fileName);
             void checkGoodParsing() const;
@@ -36,11 +37,12 @@ namespace nts
             void syncChipsetTick();
 
             Circuit &getCircuit();
+            void changeDefaultShell(Shell *shell);
 
         protected:
         private:
             std::size_t _tick = 0;
-            Shell _shell;
+            Shell *_shell;
             Circuit _circuit;
     };
 }

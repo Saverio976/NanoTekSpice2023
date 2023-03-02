@@ -7,6 +7,8 @@
 
 #pragma once
 #include <cstddef>
+#include <map>
+#include "PinLink.hpp"
 
 namespace nts
 {
@@ -30,6 +32,8 @@ namespace nts
         virtual IComponent *clone() const = 0;
 
         virtual Pin &operator [](std::size_t index) = 0;
+
+        virtual const std::map<std::size_t, Pin *> &getPins() const = 0;
     };
 }
 

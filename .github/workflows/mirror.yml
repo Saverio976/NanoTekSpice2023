@@ -33,6 +33,9 @@ jobs:
     - name: make tests_run
       run: make tests_run
 
+    - name: make -C bonus/graphic
+      run: make -C bonus/graphic
+
   publish:
     needs: [compil, tests]
     runs-on: ubuntu-latest

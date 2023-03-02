@@ -6,15 +6,6 @@
 */
 
 #pragma once
-
-/*
-** EPITECH PROJECT, 2023
-** nanotekspice
-** File description:
-** Pin
-*/
-
-#pragma once
 #include <vector>
 #include "IComponent.hpp"
 #include "PinLink.hpp"

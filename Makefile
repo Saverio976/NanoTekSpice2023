@@ -43,7 +43,7 @@ SRC 			=	src/Components/AComponent.cpp						\
 INCLUDES 		=	-Iinclude -Isrc -Isrc/Pin -Isrc/Components 				\
 					-Isrc/Components/Basic -Isrc/Components/InputOutput 	\
 					-Isrc/Components/MultiGate -Isrc/Components/Advanced	\
-					-Isrc/Components/Advanced/FlipFlops						\
+					-Isrc/Components/Advanced/FlipFlops
 
 CXXFLAGS 		= 	$(INCLUDES) -Wall -Wextra -Wpedantic -std=c++20
 

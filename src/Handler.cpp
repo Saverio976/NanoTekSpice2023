@@ -62,6 +62,6 @@ namespace nts
 
     void Handler::changeDefaultShell(Shell *shell)
     {
-        this->_shell = shell;
+        this->_shell.reset(shell);
     }
 }

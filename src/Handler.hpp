@@ -42,7 +42,7 @@ namespace nts
         protected:
         private:
             std::size_t _tick = 0;
-            Shell *_shell;
+            std::unique_ptr<Shell> _shell;
             Circuit _circuit;
     };
 }

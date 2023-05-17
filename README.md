@@ -63,4 +63,68 @@ And here's the truth table:
 
 ## Examples
 
-[TODO]
+### And Gate
+
+```bash
+# ./nanotekspice tests/nts_files/single/and.nts
+> display
+tick: 0
+input(s):
+  in_1: U
+  in_2: U
+output(s):
+  out: U
+> in_1 = 1
+> help  
+List of commands:
+        help:           Displays commands and what they do.
+
+        display:        Displays the current tick, input(s) value(s) and output(s) value(s).
+
+        simulate:       Updates the circuit and advances the ticks
+
+        loop:           Continuously calls simulate and display until (CTRL+C) is pressed.
+
+        exit:           Exits the program, same as (CTRL+D).
+
+        [in]=[0|1|U]:   Changes the value of the input component named in to false, true or undefined respectively.
+                        Note that to update the changes, you need to call simulate.
+                        Only works in input and clock components, throws an error if used on anything else
+> simulate
+> display
+tick: 1
+input(s):
+  in_1: 1
+  in_2: U
+output(s):
+  out: U
+> in_2 = 0
+> simulate
+> display
+tick: 2
+input(s):
+  in_1: 1
+  in_2: 0
+output(s):
+  out: 0
+> in_2 = 1
+> simulate
+> display
+tick: 3
+input(s):
+  in_1: 1
+  in_2: 1
+output(s):
+  out: 1
+> 
+```
+
+### GUI Mode
+
+```bash
+cd bonus/graphic
+make
+# ./nanotekspice ../../tests/nts_files/single/and.nts
+```
+
+![graphic](./bonus/graphic/graphic.png)
